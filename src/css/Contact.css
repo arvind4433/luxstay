@@ -1,0 +1,69 @@
+section {
+  font-family: 'Inter', sans-serif;
+}
+
+.display-4, h2, h3, h4 {
+  font-family: 'Playfair Display', serif;
+}
+
+.form-control, .form-select {
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+}
+
+.form-control:focus, .form-select:focus {
+  border-color: #0d6efd;
+  box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.15);
+}
+
+.accordion-button {
+  font-weight: 500;
+  background: #fff;
+  border: none;
+  border-radius: 8px !important;
+}
+
+.accordion-button:not(.collapsed) {
+  background: #0d6efd;
+  color: white;
+  box-shadow: none;
+}
+
+.accordion-body {
+  background: #f8f9fa;
+  border-radius: 0 0 8px 8px;
+}
+
+.card {
+  border-radius: 12px;
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1) !important;
+}
+
+.btn-primary {
+  background: #0d6efd;
+  border: none;
+  font-weight: 600;
+  padding: 0.75rem 2rem;
+}
+
+.btn-primary:hover {
+  background: #0b5ed7;
+}
+
+iframe {
+  border-radius: 12px;
+}
+
+@media (max-width: 768px) {
+  .display-4 {
+    font-size: 2.5rem;
+  }
+  .card {
+    margin-bottom: 1rem;
+  }
+}

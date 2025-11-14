@@ -1,0 +1,60 @@
+section {
+  font-family: 'Inter', sans-serif;
+}
+.arjust-space{
+  margin-top: 9%;
+  justify-content: center;
+  margin-left: 5%;
+  background-color:white;
+ width: 90%;
+}
+
+.display-4 {
+  font-family: 'Playfair Display', serif;
+}
+
+.btn-outline-light {
+  border-width: 2px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.btn-outline-light:hover {
+  background: #ffc107;
+  color: #212529 !important;
+  border-color: #ffc107;
+}
+
+.btn-warning {
+  font-weight: 600;
+  box-shadow: 0 4px 12px rgba(255, 193, 7, 0.3);
+}
+
+.btn-warning:hover {
+  background: #ffb300;
+  transform: translateY(-2px);
+}
+
+.input-group .form-control,
+.input-group .form-select {
+  height: 52px;
+  font-size: 1rem;
+}
+
+.input-group-text {
+  background: #f8f9fa;
+}
+
+@media (max-width: 768px) {
+  .display-4 {
+    font-size: 2.5rem;
+  }
+  .btn-outline-light {
+    font-size: 0.875rem;
+    padding: 0.5rem 1rem;
+  }
+  .input-group .form-control,
+  .input-group .form-select {
+    height: 48px;
+  }
+}

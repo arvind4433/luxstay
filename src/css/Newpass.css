@@ -1,0 +1,58 @@
+body {
+  font-family: 'Inter', sans-serif;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  min-height: 100vh;
+}
+
+h3, h4 {
+  font-family: 'Playfair Display', serif;
+}
+
+.card {
+  border-radius: 16px !important;
+  overflow: hidden;
+}
+
+.bg-primary {
+  background: linear-gradient(135deg, #0d6efd 0%, #0a58ca 100%) !important;
+}
+
+.form-control, .btn {
+  border-radius: 12px;
+}
+
+.input-group .form-control {
+  height: 52px;
+  font-size: 1rem;
+}
+
+.input-group-text {
+  background-color: #f8f9fa;
+}
+
+.btn-success {
+  background: #198754;
+  border: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.btn-success:hover {
+  background: #157347;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(25, 135, 84, 0.3);
+}
+
+small a:hover {
+  text-decoration: underline !important;
+}
+
+.form-text {
+  font-size: 0.85rem;
+}
+
+@media (max-width: 576px) {
+  .card-body {
+    padding: 1.5rem !important;
+  }
+}

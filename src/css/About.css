@@ -1,0 +1,40 @@
+section {
+  font-family: 'Inter', sans-serif;
+}
+
+.display-4, h2, h4, h5, h6 {
+  font-family: 'Playfair Display', serif;
+}
+
+.card {
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 20px rgba(0,0,0,0.1) !important;
+}
+
+.btn-primary {
+  background: #0d6efd;
+  border: none;
+  font-weight: 600;
+}
+
+.btn-primary:hover {
+  background: #0b5ed7;
+}
+
+.rounded-circle {
+  object-fit: cover;
+}
+
+.w-fit {
+  width: fit-content;
+}
+
+@media (max-width: 768px) {
+  .display-4 {
+    font-size: 2.5rem;
+  }
+}

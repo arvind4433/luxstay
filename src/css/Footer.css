@@ -1,0 +1,35 @@
+footer {
+  font-family: 'Inter', sans-serif;
+}
+
+footer h5, footer h6 {
+  font-family: 'Playfair Display', serif;
+}
+
+footer a:hover {
+  color: #ffc107 !important;
+  text-decoration: underline !important;
+}
+
+.input-group .form-control {
+  border-right: 0;
+  background: rgba(255,255,255,0.1);
+  border-color: rgba(255,255,255,0.2);
+  color: white;
+}
+
+.input-group .form-control::placeholder {
+  color: rgba(255,255,255,0.6);
+}
+
+.input-group .btn {
+  border-left: 0;
+  font-weight: 600;
+}
+
+@media (max-width: 768px) {
+  .text-md-end {
+    text-align: center !important;
+    margin-top: 1rem;
+  }
+}

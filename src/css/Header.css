@@ -1,0 +1,38 @@
+.navbar-brand {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.5rem;
+}
+.item-color{
+  color:white ;
+  
+}
+
+.navbar-nav .nav-link {
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+
+
+.btn-warning {
+  font-weight: 600;
+}
+
+@media (max-width: 991px) {
+  .navbar-collapse {
+    background: rgba(33, 37, 41, 0.98);
+    margin-top: 1rem;
+    border-radius: 12px;
+    padding: 1rem;
+  }
+  
+  .navbar-nav {
+    text-align: center;
+  }
+  
+  .d-flex.gap-2 {
+    justify-content: center;
+    margin-top: 1rem;
+  }
+}
