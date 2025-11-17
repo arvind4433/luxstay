@@ -13,7 +13,9 @@
   transition: color 0.3s;
 }
 
-
+.list-unstyled a {
+    text-decoration: none; 
+}
 
 .btn-warning {
   font-weight: 600;

@@ -10,6 +10,7 @@ const Signup = () => {
   const [name, setName] = useState(""); 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+const [image, setImage] = useState("");
 
   const handleSignup = async (e ) => {
     e.preventDefault();
@@ -21,10 +22,11 @@ const Signup = () => {
     }
 
     try {
-      const res = await axios.post("http://localhost:5000/auth/register", {
+      const res = await axios.post("https://api.bookmyhotelroom.online/auth/register", {
         name,   
         email,
-        password,
+        password, 
+        image,
       });
 
       if (res.data.status) {
@@ -59,6 +61,10 @@ const Signup = () => {
         <div className="or-divider-new">
           <span>OR</span>
         </div>
+         <div className="form-group-new mt-3">
+          <label htmlFor="image"> Upload your image</label>
+              <input type="file" />
+            </div>
 
         <form onSubmit={handleSignup}>
           <div className="form-group-new">
@@ -70,6 +76,7 @@ const Signup = () => {
               onChange={(e) => setName(e.target.value)}
             />
           </div>
+           
 
           <div className="form-group-new">
             <label>Email Address</label>

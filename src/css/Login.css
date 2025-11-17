@@ -3,6 +3,7 @@ html, body, #root {
     width:100%; 
     margin: 0;
     padding: 0;
+ 
 }
 
 
@@ -13,8 +14,7 @@ html, body, #root {
     height: 100vh; 
     background-color: #f0f2f5; 
     font-family: 'Inter', sans-serif;
-    width:100%;
- 
+
 }
 
 .new-login-card {

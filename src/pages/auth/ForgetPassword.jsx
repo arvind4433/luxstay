@@ -18,7 +18,7 @@ const ForgotPassword = () => {
     setLoading(true);
 
     try {
-      const res = await axios.post("http://localhost:5000/auth/forgot-password", {
+      const res = await axios.post("https://api.bookmyhotelroom.online/auth/forgot-password", {
         email,
       });
 

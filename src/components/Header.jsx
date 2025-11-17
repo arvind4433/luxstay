@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useEffect } from "react";
-import "../../src/css/Header.css"
+import "../../src/css/Header.css";
+import axios from 'axios';
 const Header = () => {
     const [user, setUser ] = useState("")
 
@@ -32,7 +33,7 @@ const Header = () => {
     }
   }
   return (
-    <nav className="navbar navbar-expand-lg bg-primary navbar-dark fixed-top shadow">
+    <nav className="navbar navbar-expand-lg bg-success navbar-dark fixed-top shadow">
       <div className="container">
         {/* Navbar Brand Link */}
         <Link className="navbar-brand d-flex align-items-center gap-2" to="/">
@@ -47,7 +48,7 @@ const Header = () => {
         </button>
 
         <div className="collapse navbar-collapse" id="mainNav">
-          <ul className="navbar-nav mx-auto ">
+          <ul className="navbar-nav mx-auto list-unstyled ">
          
             <li className="nav-item"><Link  className="text-white text-white  active px-3" to="/">Home</Link></li>
             <li className="nav-item"><Link className="text-white px-3" to="/room">Rooms</Link></li>
@@ -55,35 +56,40 @@ const Header = () => {
             <li className="nav-item"><Link className="text-white px-3" to="/contact">Contact</Link></li>
           </ul>
 
-          <div className="d-flex gap-2">
-        <ul className="nav navbar-nav pull-right">
+          <div className="d-flex gap-2  ">
+        <ul className="nav navbar-nav pull-right gap-3 list-unstyled d-flex align-items-center justify-content-center">
        
         {!user && (<>     <Link to ="/Signup">
-         <li className="nav-item">
+         <li className="nav-item bg-warning rounded px-2 m-0 py-2 ">
          
-          <a href="signup" className="text-white">
-            Signup
-          </a>
+      
+            
+           <span className="text-white">
+        Signup
+          </span>
          
         </li>
          </Link>
             <Link to ="/Login">
-        <li className="nav-item">
-       
-          <a href="signin" className="text-white">
-           
-            <span className="btn btn-sm rounded primary _600">Signin</span>
+        <li className="nav-item bg-warning rounded  px-2 m-0 py-2 ">
+       <span className="text-white">
+          Signin
+          </span>
           
-          </a>
           </li>
             </Link>
         </>)  }
         
         {user && (
           <>
+
+          <li>
           
-        <p>  {user.email}</p>
-          <button onClick={logout} className="btn btn-black">Logout</button>
+        <p className="bg-warning rounded px-2 m-0 py-2 d-flex "> profile: {user.email}</p>
+        </li>
+        <li>
+          <button onClick={logout} className="bg-warning text-danger py-2 border-0   rounded logout ">Logout</button>
+          </li>
           </>
           
         )}
