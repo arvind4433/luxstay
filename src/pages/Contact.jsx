@@ -19,7 +19,7 @@ const Contact = () =>{
     href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css"
     rel="stylesheet"
   />
-  {/* Header (Navbar) */}
+ 
   <nav className="navbar navbar-expand-lg bg-dark navbar-dark fixed-top shadow-sm">
     <div className="container">
       <a className="navbar-brand d-flex align-items-center gap-2" href="#">

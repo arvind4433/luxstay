@@ -9,7 +9,8 @@ import NotFound from "./pages/NotFound";
 import Signup from "./pages/auth/Signup";
 import Login from "./pages/auth/Login";
 import ForgotPassword from "./pages/auth/ForgetPassword"
-
+import HeaderRoom from "./pages/HeaderRooms";
+import Addhotel from "./pages/Addhotel";
 
 function App() {
   return (
@@ -17,17 +18,18 @@ function App() {
       <Routes>
   
         <Route path="/" element={<Home />} />
+
+        <Route path="/addhotel" element={<Addhotel />} />
+
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/room" element={<Room />} />
         <Route path="/HeaderRooms" element={<HeaderRooms />} />
         <Route path="/ForgotPassword" element={<ForgotPassword/>} />
-     
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} /> 
-        
-    
-        <Route path="*" element={<NotFound />} />
+       <Route path="/headerroom" element={<HeaderRoom />} /> 
+       <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
   );

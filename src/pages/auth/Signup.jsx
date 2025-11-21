@@ -12,7 +12,7 @@ const Signup = () => {
   const [password, setPassword] = useState("");
 const [image, setImage] = useState("");
 
-  const handleSignup = async (e ) => {
+  const handleSignup = async (e) => {
     e.preventDefault();
     setLoading(true)
 
@@ -62,7 +62,7 @@ const [image, setImage] = useState("");
           <span>OR</span>
         </div>
          <div className="form-group-new mt-3">
-          <label htmlFor="image"> Upload your image</label>
+          <label htmlFor="image">(optional) Upload your image </label>
               <input type="file" />
             </div>
 

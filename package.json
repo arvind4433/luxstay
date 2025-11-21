@@ -46,5 +46,13 @@
   "main": "eslint.config.js",
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/arvind4433/luxstay.git"
+  },
+  "bugs": {
+    "url": "https://github.com/arvind4433/luxstay/issues"
+  },
+  "homepage": "https://github.com/arvind4433/luxstay#readme"
 }
