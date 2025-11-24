@@ -10,7 +10,7 @@ const Login = () => {
   const [otp, setOtp] = useState(""); 
   const [Otpmodel, setOtpmodel] = useState(false); 
 
-  // Login Function: अब यह successful login पर OTP स्क्रीन दिखाता है
+
   const handleLogin = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -28,12 +28,10 @@ const Login = () => {
       });
 
       if (res.data.status) {
-        // अगर API response successful है (क्रेडेंशियल्स सही हैं)
-        
-        // 1. Email को store करें ताकि OTP verification में इस्तेमाल हो सके
+
         localStorage.setItem("userEmail", email); 
         
-        // 2. OTP flow शुरू करें
+   
         alert("OTP sent to your email. Please verify.");
         setOtpmodel(true);
         
@@ -62,7 +60,7 @@ const Login = () => {
       }
 
    
-      const response = await fetch("http://localhost:5000/auth/verifylogin", {
+      const response = await fetch("https://api.bookmyhotelroom.online/auth/verifylogin", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, otp }),
