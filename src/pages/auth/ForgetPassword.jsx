@@ -1,38 +1,52 @@
 import { useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import "../../css/ForgotPassword.css"; 
+import "../../css/ForgotPassword.css";
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState("");
-  const [loading, setLoading] = useState(false);
+  const [otp, setOtp] = useState("");
+  const [loadingEmail, setLoadingEmail] = useState(false);
+  const [loadingOtp, setLoadingOtp] = useState(false);
+  const [otpSent, setOtpSent] = useState(false);
 
-  const handleSubmit = async (e) => {
+  const handleEmailSubmit = async (e) => {
     e.preventDefault();
+    if (!email) return alert("Please enter your email");
 
-    if (!email) {
-      alert("Please enter your email");
-      return;
-    }
-
-    setLoading(true);
-
+    setLoadingEmail(true);
     try {
-      const res = await axios.post("https://api.bookmyhotelroom.online/auth/forgot-password", {
-        email,
-      });
-
+      const res = await axios.post("https://api.bookmyhotelroom.online/auth/forgot-password", { email });
       if (res.data.status) {
-        alert("Password reset link sent to your email");
-        setEmail("");
+        alert("OTP sent to your email!");
+        setOtpSent(true);
       } else {
-        alert(res.data.message || "Failed to send reset link");
+        alert(res.data.message || "Failed to send OTP");
       }
     } catch (err) {
-      console.error(err);
-      alert("Something went wrong, please try again");
+      alert("Something went wrong!");
     } finally {
-      setLoading(false);
+      setLoadingEmail(false);
+    }
+  };
+
+  const handleOtpSubmit = async (e) => {
+    e.preventDefault();
+    if (!otp) return alert("Please enter OTP");
+
+    setLoadingOtp(true);
+    try {
+      const res = await axios.post("https://api.bookmyhotelroom.online/auth/VerifyOTP", { email, otp });
+      if (res.data.status) {
+        alert("OTP verified! Redirecting...");
+       window.location.href = "/auth/ResetPassword";
+      } else {
+        alert(res.data.message || "Invalid OTP");
+      }
+    } catch (err) {
+      alert("Verification failed");
+    } finally {
+      setLoadingOtp(false);
     }
   };
 
@@ -40,9 +54,9 @@ const ForgotPassword = () => {
     <div className="forgot-container">
       <div className="forgot-card">
         <h2>Forgot Password?</h2>
-        <p>Enter your email to receive a password reset link.</p>
+        <p>Enter your email to receive an OTP.</p>
 
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleEmailSubmit}>
           <div className="form-group">
             <label>Email Address</label>
             <input
@@ -51,15 +65,35 @@ const ForgotPassword = () => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
+              disabled={otpSent}
             />
           </div>
 
-          <button type="submit" className="forgot-btn" disabled={loading}>
-            {loading ? "Sending..." : "Send Reset Link"}
+          <button type="submit" className="forgot-btn" disabled={loadingEmail || otpSent}>
+            {loadingEmail ? "Sending..." : "Send OTP"}
           </button>
         </form>
 
-        <p className="back-login">
+        {otpSent && (
+          <form onSubmit={handleOtpSubmit} className="mt-4">
+            <div className="form-group">
+              <label>Enter OTP</label>
+              <input
+                type="text"
+                placeholder="123456"
+                value={otp}
+                onChange={(e) => setOtp(e.target.value)}
+                required
+              />
+            </div>
+
+            <button type="submit" className="forgot-btn" disabled={loadingOtp}>
+              {loadingOtp ? "Verifying..." : "Verify OTP"}
+            </button>
+          </form>
+        )}
+
+        <p className="back-login mt-3">
           Remember your password? <Link to="/login">Back to Login</Link>
         </p>
       </div>
