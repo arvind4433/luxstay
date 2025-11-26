@@ -8,7 +8,9 @@
     background-color: #dc3545; 
     border: 1px solid #dc3545;
 }
-
+.sidebar-position{
+position: sticky; 
+}
 
 .custom-checkbox-pnb:checked {
     background-color: #dc3545; 
