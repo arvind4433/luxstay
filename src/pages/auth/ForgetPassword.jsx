@@ -16,7 +16,7 @@ const ForgotPassword = () => {
 
     setLoadingEmail(true);
     try {
-      const res = await axios.post("https://api.bookmyhotelroom.online/auth/forgot-password", { email });
+      const res = await axios.post(process.env.Backend_API+"/auth/forgot-password", { email });
       if (res.data.status) {
         alert("OTP sent to your email!");
         setOtpSent(true);
@@ -53,10 +53,12 @@ const ForgotPassword = () => {
   return (
     <div className="forgot-container">
       <div className="forgot-card">
-        <h2>Forgot Password?</h2>
-        <p>Enter your email to receive an OTP.</p>
-
-        <form onSubmit={handleEmailSubmit}>
+       
+         {otpSent ? <p className="text-success">OTP sent to {email}</p> : null}
+       {!otpSent && (
+        <>
+         <h2>Forgot Password?</h2>
+         <form onSubmit={handleEmailSubmit}>
           <div className="form-group">
             <label>Email Address</label>
             <input
@@ -72,7 +74,8 @@ const ForgotPassword = () => {
           <button type="submit" className="forgot-btn" disabled={loadingEmail || otpSent}>
             {loadingEmail ? "Sending..." : "Send OTP"}
           </button>
-        </form>
+        </form></>
+       )}
 
         {otpSent && (
           <form onSubmit={handleOtpSubmit} className="mt-4">

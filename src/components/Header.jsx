@@ -39,64 +39,84 @@ const Header = () => {
         }
     }
 
+    const [destination, setDestination] = useState("Chandigarh");
+    const [dates, setDates] = useState("Wed, 26 Nov - Thu, 27 Nov"); 
+    const [guests, setGuests] = useState("1 Room, 1 Guest");
+
     return (
-        <nav className="navbar navbar-expand-lg bg-success navbar-dark fixed-top shadow">
-            <div className="container">
-                <Link className="navbar-brand d-flex align-items-center gap-2" to="/">
-                    <span className="bg-warning text-dark rounded-circle d-flex align-items-center justify-content-center" style={{ width: 36, height: 36, fontWeight: 700 }}>
-                        L
-                    </span>
-                    <span className="fw-bold">LuxStay</span>
+        <nav className="navbar navbar-expand-lg bg-white fixed-top header-oyo-style">
+            <div className="container-fluid d-flex align-items-center px-4">
+                
+                <Link className="navbar-brand fs-2 fw-bolder me-4" to="/">
+                    <span className="text-danger">Lux</span><span className="text-dark">Stay</span>
                 </Link>
 
-                <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+                <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#searchAndAuthNav" aria-controls="searchAndAuthNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                 </button>
 
-                <div className="collapse navbar-collapse" id="mainNav">
-                    <ul className="navbar-nav mx-auto list-unstyled ">
-                        <li className="nav-item"><Link className="text-white text-white active px-3" to="/">Home</Link></li>
-                        <li className="nav-item"><Link className="text-white px-3" to="/headerroom">Rooms</Link></li>
-                        <li className="nav-item"><Link className="text-white px-3" to="/about">About</Link></li>
-                        <li className="nav-item"><Link className="text-white px-3" to="/contact">Contact</Link></li>
-                        {user && <li className="nav-item"><Link className="text-white px-3 rounded-pill bg-danger" to="/addhotel">addhotel</Link></li>}
-                    </ul>
+                <div className="collapse navbar-collapse flex-grow-1" id="searchAndAuthNav">
+                    
+                    <div className="d-none d-lg-flex flex-grow-1 justify-content-center">
+                        <div className="search-bar-oyo border rounded-2 shadow-sm d-flex align-items-stretch">
+                            
+                            <div className="search-field-oyo d-flex align-items-center">
+                                <i className="bi bi-geo-alt-fill text-muted me-2 fs-5"></i>
+                                <input type="text" className="border-0 shadow-none bg-transparent" placeholder="Location" value={destination} onChange={(e) => setDestination(e.target.value)} />
+                                
+                                <button className="btn btn-light rounded-pill fw-semibold text-dark near-me-btn me-2">
+                                    <i className="bi bi-crosshair me-1"></i> Near me
+                                </button>
+                            </div>
 
-                    <div className="d-flex gap-2">
-                        <ul className="nav navbar-nav pull-right gap-3 list-unstyled d-flex align-items-center justify-content-center">
+                            <div className="d-flex align-items-stretch">
+                                <div className="search-field-date p-3 d-flex align-items-center border-start">
+                                    <input type="text" className="border-0 shadow-none bg-transparent" placeholder="Check-in - Check-out" value={dates} readOnly />
+                                </div>
+                                
+                                <div className="search-field-guest p-3 d-flex align-items-center border-start">
+                                    <input type="text" className="border-0 shadow-none bg-transparent" placeholder="Guests" value={guests} readOnly />
+                                </div>
+                                
+                                <button className="btn btn-success rounded-end-2 rounded-start-0 fw-bold px-4 h-100 search-btn-oyo">
+                                    Search
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="d-flex align-items-center ms-auto ps-3">
                         
-                        {!user && (
-                            <>
-                                <Link to ="/Signup">
-                                    <li className="nav-item bg-warning rounded px-2 m-0 py-2">
-                                        <span className="text-white">Signup</span>
-                                    </li>
+                        {!user ? (
+                            <div className="d-flex align-items-center gap-3">
+                                <Link to="/Login" className="d-flex align-items-center text-decoration-none text-dark">
+                                    Sign In
                                 </Link>
-                                <Link to ="/Login">
-                                    <li className="nav-item bg-warning rounded px-2 m-0 py-2">
-                                        <span className="text-white">Signin</span>
-                                    </li>
+                                <Link to="/Signup" className="d-flex align-items-center text-decoration-none text-dark">
+                                    Sign Up
                                 </Link>
-                            </>
+                            </div>
+                        ) : (
+                            <div className="dropdown">
+                                <a className="d-flex align-items-center text-decoration-none text-dark dropdown-toggle fw-bold login-link-oyo" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i className="bi bi-person-circle fs-4 me-2 text-primary"></i>
+                                    {user.email.split('@')[0]}
+                                </a>
+                                <ul className="dropdown-menu dropdown-menu-end shadow border-0">
+                                    <li><Link className="dropdown-item" to="/profile"><i className="bi bi-person-fill me-2"></i> My Profile</Link></li>
+                                    <li><Link className="dropdown-item" to="/bookings"><i className="bi bi-journal-bookmark-fill me-2"></i> Bookings</Link></li>
+                                    <li><hr className="dropdown-divider" /></li>
+                                    <li><button className="dropdown-item text-danger" onClick={logout}><i className="bi bi-box-arrow-right me-2"></i> Logout</button></li>
+                                </ul>
+                            </div>
                         )}
                         
-                        {user && (
-                            <>
-                                <li>
-                                    <p className="bg-warning rounded px-2 m-0 py-2 d-flex"> profile: {user.email}</p>
-                                </li>
-                                <li>
-                                    <button onClick={logout} className="bg-warning text-danger py-2 border-0 rounded logout">Logout</button>
-                                </li>
-                            </>
-                        )}
-                        
-                        </ul>
                     </div>
                 </div>
             </div>
         </nav>
     );
 };
+
 
 export default Header;

@@ -1,139 +1,122 @@
-import "../../src/css/Hero.css"
-const Hero = () =>{
-    return(
+import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+import "../../src/css/Header.css";
+import axios from 'axios';
 
-        <>
-        <>
-  
-  <section
-    className="text-success arjust-space card  "
-  >
-    <div className="container py-5">
-      <div className="row gy-5">
-        {/* Main Hero Content */}
-        <div className="col-lg-12 text-center text-lg-start">
-          <h1 className="display-4 fw-bold mb-3 text-center">
-            Book Your Dream Stay in India
-          </h1>
-          <p className="lead mb-4 text-danger  text-center">
-            <u>
-                 From beach resorts to mountain retreats — find verified hotels at
-            unbeatable prices.
-            </u>
-         
-          </p>
-        </div>
-        {/* Search Form */}
-        <div className="col-lg-12 ">
-          <div className=" text-dark rounded-4 p-4 border shadow-lg ">
-            <form>
-              <div className="row g-3 align-items-center">
-                <div className="col-md-4">
-                  <div className="input-group">
-                    <span className="input-group-text bg-light border-0">
-                      <i className="bi bi-geo-alt-fill text-primary" />
-                    </span>
-                    <input
-                      type="text"
-                      className="form-control  border-0 shadow-none"
-                      placeholder=" Type your Destination Here (e.g. Goa, Manali)"
-                    />
-                  </div>
-                </div>
-                <div className="col-md-2">
-                  <input type="date" className="form-control" id="checkin"  />
-                </div>
-                <div className="col-md-2">
-                  <input type="date" className="form-control" id="checkout" />
-                </div>
-                <div className="col-md-2">
-                  <select className="form-select">
-                    <option>1 Guest</option>
-                    <option>2 Guests</option>
-                    <option>3 Guests</option>
-                    <option>4+ Guests</option>
-                  </select>
-                </div>
-                <div className="col-md-2 d-grid">
-                  <button
-                    type="submit"
-                    className="btn btn-warning rounded-pill h-100 fw-semibold"
-                  >
-                    <i className="bi bi-search me-1" /> Search
-                  </button>
-                </div>
-              </div>
-            </form>
-          </div>
-        </div>
-        {/* Category Pills (Quick Filters) */}
-        <div className="col-lg-12">
-          <div className="d-flex flex-wrap gap-2 justify-content-center justify-content-lg-start">
-            <a
-              href="#"
-              className="btn shadow-lg border text-success rounded-pill px-4 py-2 d-flex align-items-center gap-2"
-            >
-              <i className="bi  bi-building  " /> Luxury Hotels
-            </a>
-            <a
-              href="#"
-              className="btn shadow-lg border text-success rounded-pill px-4 py-2 d-flex align-items-center gap-2"
-            >
-              <i className="bi bi-water" /> Beach Resorts
-            </a>
-            <a
-              href="#"
-              className="btn shadow-lg border text-success rounded-pill px-4 py-2 d-flex align-items-center gap-2"
-            >
-              <i className="bi bi-snow" /> Hill Stations
-            </a>
-            <a
-              href="#"
-              className="btn shadow-lg border text-success rounded-pill px-4 py-2 d-flex align-items-center gap-2"
-            >
-              <i className="bi bi-heart-pulse" /> Honeymoon
-            </a>
-            <a
-              href="#"
-              className="btn shadow-lg border text-success rounded-pill px-4 py-2 d-flex align-items-center gap-2"
-            >
-              <i className="bi bi-briefcase" /> Business
-            </a>
-            <a
-              href="#"
-              className="btn shadow-lg border text-success rounded-pill px-4 py-2 d-flex align-items-center gap-2"
-            >
-              <i className="bi bi-currency-rupee" /> Budget Stays
-            </a>
-          </div>
-        </div>
-        {/* Trust & Stats */}
-        <div className="col-lg-12">
-          <div className="row g-4 text-center text-lg-start">
-            <div className="col-6 col-md-3">
-              <h3 className="fw-bold mb-1">50K+</h3>
-              <p className="small mb-0 opacity-75">Happy Guests</p>
-            </div>
-            <div className="col-6 col-md-3">
-              <h3 className="fw-bold mb-1">1,200+</h3>
-              <p className="small mb-0 opacity-75">Hotels Listed</p>
-            </div>
-            <div className="col-6 col-md-3">
-              <h3 className="fw-bold mb-1">4.8★</h3>
-              <p className="small mb-0 opacity-75">Average Rating</p>
-            </div>
-            <div className="col-6 col-md-3">
-              <h3 className="fw-bold mb-1">24/7</h3>
-              <p className="small mb-0 opacity-75">Support</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-</>
+const Header = () => {
+    const [user, setUser ] = useState(null)
 
-        </>
-    )
-}
-export default Hero;
+    useEffect(() => {
+        const token = localStorage.getItem("token");
+        if(token){
+            getUser(token)
+        }
+    },[])
+
+    const getUser = async (token) => {
+        try {
+            const res = await axios.get("https://api.bookmyhotelroom.online/auth/getUser", {
+                headers: {
+                    'Authorization': token 
+                }
+            });
+            
+            if (res.data.data) {
+                setUser(res.data.data);
+            }
+            
+        } catch (error) {
+            console.error("Failed to fetch user:", error);
+            localStorage.removeItem("token");
+        }
+    }
+
+    const logout = () => {
+        const confirm = window.confirm("Are you Sure?")
+        if(confirm){
+            localStorage.removeItem("token");
+            window.location.reload();
+        }
+    }
+
+    const [destination, setDestination] = useState("Chandigarh");
+    const [dates, setDates] = useState("Wed, 26 Nov - Thu, 27 Nov"); 
+    const [guests, setGuests] = useState("1 Room, 1 Guest");
+
+    return (
+        <nav className="navbar navbar-expand-lg bg-white fixed-top header-oyo-style">
+            <div className="container-fluid d-flex align-items-center px-4">
+                
+                <Link className="navbar-brand fs-2 fw-bolder me-4" to="/">
+                    <span className="text-danger">Lux</span><span className="text-dark">Stay</span>
+                </Link>
+
+                <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#searchAndAuthNav" aria-controls="searchAndAuthNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span className="navbar-toggler-icon"></span>
+                </button>
+
+                <div className="collapse navbar-collapse flex-grow-1" id="searchAndAuthNav">
+                    
+                    <div className="d-none d-lg-flex flex-grow-1 justify-content-center">
+                        <div className="search-bar-oyo border rounded-2 shadow-sm d-flex align-items-stretch">
+                            
+                            <div className="search-field-oyo d-flex align-items-center">
+                                <i className="bi bi-geo-alt-fill text-muted me-2 fs-5"></i>
+                                <input type="text" className="border-0 shadow-none bg-transparent" placeholder="Location" value={destination} onChange={(e) => setDestination(e.target.value)} />
+                                
+                                <button className="btn btn-light rounded-pill fw-semibold text-dark near-me-btn me-2">
+                                    <i className="bi bi-crosshair me-1"></i> Near me
+                                </button>
+                            </div>
+
+                            <div className="d-flex align-items-stretch">
+                                <div className="search-field-date p-3 d-flex align-items-center border-start">
+                                    <input type="text" className="border-0 shadow-none bg-transparent" placeholder="Check-in - Check-out" value={dates} readOnly />
+                                </div>
+                                
+                                <div className="search-field-guest p-3 d-flex align-items-center border-start">
+                                    <input type="text" className="border-0 shadow-none bg-transparent" placeholder="Guests" value={guests} readOnly />
+                                </div>
+                                
+                                <button className="btn btn-success rounded-end-2 rounded-start-0 fw-bold px-4 h-100 search-btn-oyo">
+                                    Search
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="d-flex align-items-center ms-auto ps-3">
+                        
+                        {!user ? (
+                            <div className="d-flex align-items-center gap-3">
+                                <Link to="/Login" className="text-decoration-none text-dark fw-bold login-link-oyo">
+                                    Sign In
+                                </Link>
+                                <Link to="/Signup" className="text-decoration-none text-dark fw-bold login-link-oyo">
+                                    Sign Up
+                                </Link>
+                            </div>
+                        ) : (
+                            <div className="dropdown">
+                                <a className="d-flex align-items-center text-decoration-none text-dark dropdown-toggle fw-bold login-link-oyo" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i className="bi bi-person-circle fs-4 me-2 text-primary"></i>
+                                    {user.email.split('@')[0]}
+                                </a>
+                                <ul className="dropdown-menu dropdown-menu-end shadow border-0">
+                                    <li><Link className="dropdown-item" to="/profile"><i className="bi bi-person-fill me-2"></i> My Profile</Link></li>
+                                    <li><Link className="dropdown-item" to="/bookings"><i className="bi bi-journal-bookmark-fill me-2"></i> Bookings</Link></li>
+                                    <li><hr className="dropdown-divider" /></li>
+                                    <li><button className="dropdown-item text-danger" onClick={logout}><i className="bi bi-box-arrow-right me-2"></i> Logout</button></li>
+                                </ul>
+                            </div>
+                        )}
+                        
+                    </div>
+                </div>
+            </div>
+        </nav>
+    );
+};
+
+
+export default Header;
