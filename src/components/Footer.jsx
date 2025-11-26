@@ -1,169 +1,76 @@
+const Footer = () => {
+    return (
+        <footer className="bg-dark text-white pt-5 pb-4 mt-5">
+            <div className="container text-center text-md-left">
+                <div className="row text-center text-md-left">
 
-import { Link } from "react-router-dom";
-const Footer = ()=>{
-  return(
-    <>
-    <>
-  <meta charSet="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>LuxStay - Footer</title>
-  <link
-    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-    rel="stylesheet"
-  />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@700&display=swap"
-    rel="stylesheet"
-  />
-  <link rel="stylesheet" href="./footer.css" />
-  <footer className="bg-dark text-light py-5">
-    <div className="container">
-      <div className="row gy-4">
-    
-        <div className="col-lg-4 col-md-6">
-          <div className="d-flex align-items-center gap-2 mb-3">
-            <span
-              className="bg-warning text-dark rounded-circle d-flex align-items-center justify-content-center fw-bold"
-              style={{ width: 40, height: 40 }}
-            >
-              L
-            </span>
-            <h5 className="mb-0 fw-bold">LuxStay</h5>
-          </div>
-          <p className=" small">
-            Book luxury hotels with confidence. Best prices, verified reviews,
-            and 24/7 support across India.
-          </p>
-          <div className="d-flex gap-2">
-            <a href="#" className="text-light">
-              <i className="bi bi-facebook fs-5" />
-            </a>
-            <a href="#" className="text-light">
-              <i className="bi bi-twitter fs-5" />
-            </a>
-            <a href="#" className="text-light">
-              <i className="bi bi-instagram fs-5" />
-            </a>
-            <a href="#" className="text-light">
-              <i className="bi bi-linkedin fs-5" />
-            </a>
-          </div>
-        </div>
-  
-        <div className="col-lg-2 col-md-3 col-6">
-          <h6 className="fw-semibold text-warning mb-3">Company</h6>
-          <ul className="list-unstyled">
-            <li>
-              <a href="#" className=" text-decoration-none small">
-                About Us
-              </a>
-            </li>
-            <li>
-              <a href="#" className=" text-decoration-none small">
-                Careers
-              </a>
-            </li>
-            <li>
-              <a href="#" className=" text-decoration-none small">
-                Press
-              </a>
-            </li>
-            <li>
-              <a href="#" className=" text-decoration-none small">
-                Blog
-              </a>
-            </li>
-          </ul>
-        </div>
-  
-        <div className="col-lg-2 col-md-3 col-6">
-          <h6 className="fw-semibold text-warning mb-3">Support</h6>
-          <ul className="list-unstyled">
-            <li>
-              <a href="#" className=" text-decoration-none small">
-                Help Center
-              </a>
-            </li>
-            <li>
-              <a href="#" className=" text-decoration-none small">
-                Safety
-              </a>
-            </li>
-            <li>
-              <a href="#" className=" text-decoration-none small">
-                Contact
-              </a>
-            </li>
-            <li>
-              <a href="#" className=" text-decoration-none small">
-                FAQs
-              </a>
-            </li>
-          </ul>
-        </div>
+                    {/* 1. Brand & Contact Info */}
+                    <div className="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
+                        <h5 className="text-uppercase mb-4 fw-bold text-danger">
+                            <span className="text-danger">Lux</span><span className="text-white">Stay</span>
+                        </h5>
+                        <p>Your one-stop solution for luxurious and budget-friendly hotel bookings across India.</p>
+                        <p><i className="bi bi-geo-alt-fill me-2 text-danger"></i> Chandigarh, India</p>
+                        <p><i className="bi bi-envelope-fill me-2 text-danger"></i> support@luxstay.in</p>
+                        <p><i className="bi bi-telephone-fill me-2 text-danger"></i> +91 88948 10531</p>
+                    </div>
 
-        <div className="col-lg-2 col-md-6">
-          <h6 className="fw-semibold text-warning mb-3">Legal</h6>
-          <ul className="list-unstyled">
-            <li>
-              <a href="#" className=" text-decoration-none small">
-                Privacy Policy
-              </a>
-            </li>
-            <li>
-              <a href="#" className=" text-decoration-none small">
-                Terms of Service
-              </a>
-            </li>
-            <li>
-              <a href="#" className=" text-decoration-none small">
-                Cookie Policy
-              </a>
-            </li>
-          </ul>
-        </div>
-   
-        <div className="col-lg-2 col-md-6">
-          <h6 className="fw-semibold text-warning mb-3">Newsletter</h6>
-          <p className="small ">Get exclusive deals in your inbox</p>
-          <form>
-            <div className="input-group">
-              <input
-                type="email"
-                className="form-control form-control-sm rounded-start-pill"
-                placeholder="Email"
-              />
-              <button
-                className="btn btn-warning btn-sm rounded-end-pill px-3"
-                type="submit"
-              >
-                Subscribe
-              </button>
+                    {/* 2. Company Links */}
+                    <div className="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
+                        <h5 className="text-uppercase mb-4 fw-bold text-white">Company</h5>
+                        <p><a href="#" className="text-white text-decoration-none">About Us</a></p>
+                        <p><a href="#" className="text-white text-decoration-none">Careers</a></p>
+                        <p><a href="#" className="text-white text-decoration-none">Blog</a></p>
+                        <p><a href="#" className="text-white text-decoration-none">Partnership</a></p>
+                    </div>
+
+                    {/* 3. Support & Booking */}
+                    <div className="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3">
+                        <h5 className="text-uppercase mb-4 fw-bold text-white">Support</h5>
+                        <p><a href="#" className="text-white text-decoration-none">Contact Us</a></p>
+                        <p><a href="#" className="text-white text-decoration-none">Help Center</a></p>
+                        <p><a href="#" className="text-white text-decoration-none">Bookings</a></p>
+                        <p><a href="#" className="text-white text-decoration-none">Cancellation Policy</a></p>
+                    </div>
+
+                    {/* 4. Social Media & Newsletter */}
+                    <div className="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
+                        <h5 className="text-uppercase mb-4 fw-bold text-white">Follow Us</h5>
+                        <div className="social-links mb-3">
+                            <a href="#" className="btn btn-sm btn-outline-light me-2"><i className="bi bi-facebook"></i></a>
+                            <a href="#" className="btn btn-sm btn-outline-light me-2"><i className="bi bi-twitter"></i></a>
+                            <a href="#" className="btn btn-sm btn-outline-light me-2"><i className="bi bi-instagram"></i></a>
+                            <a href="#" className="btn btn-sm btn-outline-light"><i className="bi bi-linkedin"></i></a>
+                        </div>
+                        <h5 className="text-uppercase mb-3 fw-bold text-white">Subscribe</h5>
+                        <form>
+                            <div className="input-group mb-3">
+                                <input type="email" className="form-control form-control-sm" placeholder="Your Email" aria-label="Your Email" />
+                                <button className="btn btn-danger btn-sm" type="submit">Go</button>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+
+                <hr className="mb-4 bg-secondary" />
+
+                <div className="row align-items-center">
+                    <div className="col-md-7 col-lg-8">
+                        <p className="text-center text-md-left mb-0">
+                            Copyright © 2025 <span className="text-danger fw-bold">LuxStay</span>. All Rights Reserved.
+                        </p>
+                    </div>
+                    <div className="col-md-5 col-lg-4 mt-3 mt-md-0">
+                        <div className="text-center text-md-end">
+                            <a href="#" className="text-white me-3 text-decoration-none small">Privacy Policy</a>
+                            <a href="#" className="text-white text-decoration-none small">Terms of Use</a>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </form>
-        </div>
-      </div>
-      <hr className="my-4 border-secondary" />
-      <div className="row align-items-center">
-        <div className="col-md-6">
-          <p className="mb-0 small ">© 2025 LuxStay. All rights reserved.</p>
-        </div>
-        <div className="col-md-6 text-md-end">
-          <small className="">
-            Made with <span className="text-danger">❤️</span> in India
-          </small>
-        </div>
-      </div>
-    </div>
-  </footer>
+        </footer>
+    );
+};
 
-  <link
-    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css"
-    rel="stylesheet"
-  />
-</>
-    </>
-  )
-}
 export default Footer;
-

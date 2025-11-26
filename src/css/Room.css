@@ -1,56 +1,45 @@
-section {
-  font-family: 'Inter', sans-serif;
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f7f9fb;
+}
+.text-primary-pnb {
+    color: #007bff;
 }
 
-.display-5 {
-  font-family: 'Playfair Display', serif;
+
+.hero-banner {
+    position: relative;
+    overflow: hidden;
+   
 }
 
-.card {
-  transition: all 0.3s ease;
+
+.hover-lift {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.card:hover, .hover-lift:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12) !important;
+.hover-lift:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175) !important; 
 }
 
 .card-img-top {
-  transition: transform 0.3s ease;
+    object-fit: cover;
 }
 
-.card:hover .card-img-top {
-  transform: scale(1.05);
+
+.footer a:hover {
+    color: #dc3545 !important; 
+    text-decoration: none !important;
 }
 
-.btn-primary {
-  background: #0d6efd;
-  border: none;
-  font-weight: 600;
+a {
+    color: #dc3545;
+    text-decoration: none;
+    transition: color 0.2s;
 }
 
-.btn-primary:hover {
-  background: #0b5ed7;
-  transform: translateY(-2px);
-}
-
-.btn-outline-primary {
-  font-weight: 500;
-}
-
-.text-primary {
-  color: #0d6efd !important;
-}
-
-.bg-primary {
-  background: linear-gradient(135deg, #0d6efd 0%, #0a58ca 100%) !important;
-}
-
-@media (max-width: 768px) {
-  .display-5 {
-    font-size: 2rem;
-  }
-  .lead {
-    font-size: 1rem;
-  }
+a:hover {
+    color: #b02a37; 
 }
