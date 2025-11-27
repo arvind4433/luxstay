@@ -2,12 +2,13 @@ import React from 'react';
 import '../css/Sidebar.css';
 const Sidebar = () => { 
     return (
-        <div className="container-fluid mt-5">
+      <>
+              <div className="container-fluid mt-5 pt-4">
             
             <div className="row">
                 
-                <div className="col-lg-3 d-none d-lg-block sidebar-position">
-                    <div className="sidebar-container sticky-top border rounded-3 p-4 bg-white sidebar-shadow">
+                <div className="col-lg-3 d-none d-lg-block">
+                  <div className="sidebar-container sticky-top border rounded-3 p-4 bg-white sidebar-shadow">
                         
                         <h4 className="mb-4 text-danger fw-bolder"> Filter Your Stay</h4>
                         
@@ -73,10 +74,13 @@ const Sidebar = () => {
                             Apply Filters
                         </button>
 
-                    </div>
+                    </div> 
+
+
+                   
                 </div>
                 
-                <div className="col-lg-9 col-12 margin-sidebar">
+                <div className="col-lg-9 col-12 mt-3 ">
                     <h2 className="mb-4 fw-bolder Hotels-Listing text-dark ">Hotels Listing <span className="text-muted fs-5">(Showing 45 results)</span></h2>
                     
                 
@@ -198,7 +202,10 @@ const Sidebar = () => {
                 
             </div>
         </div>
-    );
-};
+       
+    
+      </>
+    )
+  }
 
 export default Sidebar;

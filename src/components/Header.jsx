@@ -44,7 +44,7 @@ const Header = () => {
     const [guests, setGuests] = useState("1 Room, 1 Guest");
 
     return (
-        <nav className="navbar navbar-expand-lg bg-white  header-oyo-style border-bottom shadow-sm">
+        <nav className="navbar navbar-expand-lg bg-white fixed-top header-oyo-style border-bottom shadow-sm">
             <div className="container-fluid d-flex align-items-center px-4">
                 
                 <Link className="navbar-brand fs-2 fw-bolder me-4" to="/">
