@@ -98,7 +98,7 @@ const Addhotel = () => {
           <div className="form-group-new">
             <label>Price (per night)</label>
             <input
-              type="number"
+              type="text"
               placeholder="Minimum 100"
               value={price}
               onChange={(e) => setPrice(Number(e.target.value))}
