@@ -10,7 +10,7 @@ import Signup from "./pages/auth/Signup";
 import Login from "./pages/auth/Login";
 import ForgotPassword from "./pages/auth/ForgetPassword"
 import HeaderRoom from "./pages/HeaderRooms";
-import Addhotel from "./pages/Addhotel";
+import Addhotel from "./pages/auth/Addhotel"
 
 function App() {
   return (
