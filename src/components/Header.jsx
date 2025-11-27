@@ -47,7 +47,7 @@ const Header = () => {
         <nav className="navbar navbar-expand-lg bg-white fixed-top header-oyo-style border-bottom shadow-sm">
             <div className="container-fluid d-flex align-items-center px-4">
                 
-                <Link className="navbar-brand fs-2 fw-bolder me-4" to="/">
+                <Link className="navbar-brand fs-2 fw-bolder " to="/">
                     <span className="text-danger">Lux</span><span className="text-dark">Stay</span>
                 </Link>
 
@@ -61,10 +61,10 @@ const Header = () => {
                         <div className="search-bar-oyo border rounded-2 shadow-sm d-flex align-items-stretch">
                             
                             <div className="search-field-oyo d-flex align-items-center">
-                                <i className="bi bi-geo-alt-fill text-muted me-2 fs-5"></i>
+                                <i className="bi bi-geo-alt-fill text-muted me-1 fs-5"></i>
                                 <input type="text" className="border-0 shadow-none bg-transparent" placeholder="Location" value={destination} onChange={(e) => setDestination(e.target.value)} />
                                 
-                                <button className="btn btn-light rounded-pill fw-semibold text-dark near-me-btn me-2">
+                                <button className="btn btn-light rounded-pill fw-semibold text-dark near-me-btn me-1">
                                     <i className="bi bi-crosshair me-1"></i> Near me
                                 </button>
                             </div>
@@ -88,25 +88,28 @@ const Header = () => {
                     <div className="d-flex align-items-center ms-auto ps-3">
                         
                         {!user ? (
-                            <div className="d-flex align-items-center gap-3">
-                                <Link to="/Login" className="d-flex align-items-center text-decoration-none  text-dark">
-                                   <p className="sign-button"> Sign In</p>
+                            <div className="d-flex align-items-center gap-1">
+                                  <Link to="/addhotel" className="d-flex align-items-center text-center px-3 text-decoration-none bg-danger rounded-3 text-dark">
+                                   <span className="text-white"> add hotel</span>
                                 </Link>
-                                <Link to="/Signup" className="d-flex align-items-center text-decoration-none  text-dark">
-                                   <p className="sign-button"> Sign Up</p>
+                                <Link to="/Login" className="d-flex align-items-center text-center px-3 text-decoration-none bg-success  rounded-3 text-dark">
+                                   <span className="text-white"> Sign In</span>
+                                </Link>
+                                <Link to="/Signup" className="d-flex align-items-center text-center px-2 text-decoration-none bg-success rounded-3 text-dark">
+                                   <span className="text-white"> Sign Up</span>
                                 </Link>
                             </div>
                         ) : (
                             <div className="dropdown">
                                 <a className="d-flex align-items-center text-decoration-none text-dark dropdown-toggle fw-bold login-link-oyo" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <i className="bi bi-person-circle fs-4 me-2 text-primary"></i>
+                                    <i className="bi bi-person-circle fs-4 me-1 text-primary"></i>
                                     {user.email.split('@')[0]}
                                 </a>
                                 <ul className="dropdown-menu dropdown-menu-end shadow border-0">
-                                    <li><Link className="dropdown-item" to="/profile"><i className="bi bi-person-fill me-2"></i> My Profile</Link></li>
-                                    <li><Link className="dropdown-item" to="/bookings"><i className="bi bi-journal-bookmark-fill me-2"></i> Bookings</Link></li>
+                                    <li><Link className="dropdown-item" to="/profile"><i className="bi bi-person-fill me-1"></i> My Profile</Link></li>
+                                    <li><Link className="dropdown-item" to="/bookings"><i className="bi bi-journal-bookmark-fill me-1"></i> Bookings</Link></li>
                                     <li><hr className="dropdown-divider" /></li>
-                                    <li><button className="dropdown-item text-danger" onClick={logout}><i className="bi bi-box-arrow-right me-2"></i> Logout</button></li>
+                                    <li><button className="dropdown-item text-danger" onClick={logout}><i className="bi bi-box-arrow-right me-1"></i> Logout</button></li>
                                 </ul>
                             </div>
                         )}
