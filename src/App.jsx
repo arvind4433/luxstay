@@ -3,14 +3,16 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import About from "./pages/about";
 import Contact from "./pages/Contact";
-import Room from "./pages/Room";
-import HeaderRooms from "./pages/HeaderRooms";
+import Video from "./pages/Video";
+
 import NotFound from "./pages/NotFound";
 import Signup from "./pages/auth/Signup";
 import Login from "./pages/auth/Login";
 import ForgotPassword from "./pages/auth/ForgetPassword"
-import HeaderRoom from "./pages/HeaderRooms";
+
 import Addhotel from "./pages/auth/Addhotel"
+import ResetPassword from "./pages/auth/ResetPassword";
+import Facilities from "./pages/Facilities";
 
 function App() {
   return (
@@ -20,15 +22,16 @@ function App() {
         <Route path="/" element={<Home />} />
 
         <Route path="/addhotel" element={<Addhotel />} />
+        <Route path="/facilities" element={<Facilities />} />
 
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
-        <Route path="/room" element={<Room />} />
-        <Route path="/HeaderRooms" element={<HeaderRooms />} />
+       
         <Route path="/ForgotPassword" element={<ForgotPassword/>} />
+        <Route path="/ResetPassword/:token" element={<ResetPassword/>} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} /> 
-       <Route path="/headerroom" element={<HeaderRoom />} /> 
+      
        <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>

@@ -16,7 +16,7 @@ const ForgotPassword = () => {
 
     setLoadingEmail(true);
     try {
-      const res = await axios.post(process.env.Backend_API+"/auth/forgot-password", { email });
+      const res = await axios.post("http://localhost:5000/auth/forgot-password", { email });
       if (res.data.status) {
         alert("OTP sent to your email!");
         setOtpSent(true);
@@ -36,10 +36,10 @@ const ForgotPassword = () => {
 
     setLoadingOtp(true);
     try {
-      const res = await axios.post("https://api.bookmyhotelroom.online/auth/VerifyOTP", { email, otp });
+      const res = await axios.post("http://localhost:5000/auth/verify-otp", { email, otp, type : "forgot" });
       if (res.data.status) {
         alert("OTP verified! Redirecting...");
-       window.location.href = "/auth/ResetPassword";
+       window.location.href = "/ResetPassword/"+res.data.token;
       } else {
         alert(res.data.message || "Invalid OTP");
       }

@@ -20,18 +20,30 @@ const ResetPassword = () => {
     }
 
     try {
-      const res = await axios.post("https://api.bookmyhotelroom.online/auth/reset-password", {
-        password: newPassword,
+    const token=  window.location.pathname.split("/ResetPassword/")[1]
+
+   
+       const response = await fetch("http://localhost:5000/auth/updatePassword", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", "authorization" :token },
+        body: JSON.stringify({ newPassword }),
       });
 
-      if (res.data.success) {
-        alert("Password updated successfully");
-        window.location.href = "/login";
-      } else {
+         const result = await response.json();
+
+      if (response.ok && result.status === true) {
+       
+        alert(result.message);
+     
+        window.location.href="/login"
+      
+      } 
+    
+     else {
         alert(res.data.message || "Failed to update password");
       }
     } catch (error) {
-      console.error(error);
+    
       alert("Something went wrong");
     }
   };

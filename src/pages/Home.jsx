@@ -1,14 +1,22 @@
 import { Link } from "react-router-dom"
 import Header from "../components/Header";
-import Room from "../pages/Room";
+import Video from "../pages/Video";
 import Footer from "../components/Footer";
-import Sidebar from "../components/Sidebar"
+import Facilities from "../pages/Facilities"
+import Information from "../pages/Information"
+
+
+
 const Home =()=>{
     return(
         <>
         <Header />
-       <Sidebar />
-   <Room/>
+       
+   <Video/>
+   
+   
+<Information/>
+< Facilities/>
         <Footer/>
         </>
     )

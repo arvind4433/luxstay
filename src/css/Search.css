@@ -1,0 +1,144 @@
+/* Search Bar Only CSS - Professional & Clean */
+
+.search-container {
+  margin-top: 50px;
+  width: 100%;
+  max-width: 1000px;
+  position: relative;
+}
+
+.search-bar {
+  background: white;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+  overflow: hidden;
+  transition: all 0.4s ease;
+  border: 3px solid transparent;
+  position: relative;
+}
+
+.search-bar.hovered {
+  border-color: #e74c3c;
+  box-shadow: 0 20px 50px rgba(231, 76, 60, 0.25);
+  transform: translateY(-8px);
+}
+
+.search-field {
+  flex: 1;
+  padding: 20px 24px;
+  cursor: pointer;
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-width: 200px;
+}
+
+.search-field i:first-child {
+  font-size: 1.5rem;
+  color: #e74c3c;
+}
+
+.field-content {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.field-label {
+  font-size: 0.85rem;
+  color: #888;
+  font-weight: 500;
+}
+
+.field-value {
+  font-size: 1.15rem;
+  color: #222;
+  font-weight: 600;
+  margin-top: 2px;
+}
+
+.arrow {
+  font-size: 1.3rem;
+  color: #999;
+  transition: transform 0.3s ease;
+}
+
+.arrow.rotate {
+  transform: rotate(180deg);
+  color: #e74c3c;
+}
+
+/* Dropdown Menu */
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: white;
+  border: 1px solid #eee;
+  border-radius: 0 0 12px 12px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+  z-index: 100;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.dropdown-item {
+  padding: 14px 24px;
+  cursor: pointer;
+  transition: 0.2s;
+  border-bottom: 1px solid #f5f5f5;
+}
+
+.dropdown-item:hover {
+  background: #fdf2f2;
+  color: #e74c3c;
+  padding-left: 30px;
+}
+
+.dropdown-item:last-child {
+  border-bottom: none;
+}
+
+/* Guest Dropdown - Right Aligned */
+.guest-dropdown {
+  right: 0;
+  left: auto;
+  width: 280px;
+}
+
+/* Search Button */
+.search-btn {
+  background: #e74c3c;
+  color: white;
+  border: none;
+  padding: 0 50px;
+  font-size: 1.3rem;
+  font-weight: 600;
+  height: 100%;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.search-btn:hover {
+  background: #c0392b;
+}
+
+/* Mobile */
+@media (max-width: 992px) {
+  .search-bar {
+    flex-direction: column;
+  }
+  .search-field {
+    width: 100%;
+    border-bottom: 1px solid #eee;
+  }
+  .search-btn {
+    width: 100%;
+    padding: 20px;
+    border-radius: 0 0 16px 16px;
+  }
+}

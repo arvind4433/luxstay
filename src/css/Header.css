@@ -1,109 +1,125 @@
-/* Header.css */
+/* Header.css - Bilkul simple aur clean */
 
-.header-oyo-style {
-    height: 70px; 
-    padding: 0;
+.main-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 25px 0;
+  background: transparent;
+  z-index: 9999;
+  transition: all 0.4s ease;
 }
 
-.navbar-brand {
-    font-size: 1.8rem;
-    font-weight: 900 !important;
+.main-header.active {
+  background: rgba(0, 0, 0, 0.9);
+  padding: 18px 0;
+  backdrop-filter: blur(10px);
 }
 
-.search-bar-oyo {
-    max-width: 900px;
-    height: 50px; 
-    background-color: white;
-    border-color: #ddd !important;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); 
+.main-header.hide {
+  transform: translateY(-100%);
 }
 
-.search-field-oyo {
-    padding: 0 1.5rem 0 1rem !important; 
-    min-width: 280px;
-    position: relative;
-    flex-shrink: 0;
+/* Logo */
+.logo {
+  font-size: 2.2rem;
+  font-weight: bold;
+  color: white;
+  text-decoration: none;
+  font-family: serif;
+}
+.red { color: #e74c3c; }
+
+/* Menu */
+.nav-menu {
+  display: flex;
+  gap: 50px;
+  align-items: center;
 }
 
-.search-field-date, 
-.search-field-guest {
-    padding: 0 1rem !important; 
-    min-width: 170px;
-    flex-grow: 1;
-    white-space: nowrap;
+.nav-link {
+  color: white;
+  text-decoration: none;
+  font-size: 1.1rem;
+  font-weight: 500;
+  cursor: pointer;
 }
 
-.search-field-oyo input,
-.search-field-date input,
-.search-field-guest input {
-    width: 100%;
-    font-size: 1rem;
-    color: #444;
-    padding: 0;
-    margin: 0;
-    height: 50px; 
+/* Dropdown */
+.dropdown {
+  position: relative;
 }
 
-.near-me-btn {
-    position: static; 
-    background-color: #f0f0f0 !important;
-    color: #444;
-    border: none;
-    font-size: 0.9rem;
-    padding: 0.5rem 1rem;
-    height: 80%; 
-    align-self: center;
-    flex-shrink: 0;
+.dropdown:hover .dropdown-box {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(10px);
 }
 
-.search-btn-oyo {
-    background-color: #1ba048 !important; 
-    border-color: #1ba048 !important;
- 
-}
-.buttton-upper{
- background-color: #1ba048 !important; 
-    border-color: #1ba048 !important;
- 
-}
-
-
-.border-start {
-    border-left: 1px solid #ddd !important;
-}
-
-.navbar-nav .nav-link {
-    display: none;
+.dropdown-box {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  background: white;
+  min-width: 200px;
+  border-radius: 12px;
+  padding: 15px 0;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.4s;
 }
 
-/* --- Mobile Adjustments --- */
-@media (max-width: 991px) {
-    .header-oyo-style {
-        height: auto;
-    }
-    .search-bar-oyo {
-        display: none !important;
-    }
-    
-    #searchAndAuthNav {
-        padding: 1rem;
-        background-color: white;
-        border-top: 1px solid #eee;
-    }
-    
-    .ms-auto {
-        flex-direction: column;
-        align-items: flex-start !important;
-        gap: 1rem !important;
-        width: 100%;
-    }
-    
-   
-    .login-link-oyo {
-        width: 100%;
-        padding: 0.5rem 0;
-        border-top: 1px solid #eee;
-        justify-content: flex-start;
-    }
+.dropdown-box a {
+  display: block;
+  padding: 10px 25px;
+  color: #333;
+  text-decoration: none;
+  font-size: 0.98rem;
 }
 
+.dropdown-box a:hover {
+  background: #fdf2f2;
+  color: #e74c3c;
+}
+
+/* Right Buttons */
+.auth {
+  display: flex;
+  gap: 15px;
+}
+
+.signin {
+  color: white;
+  padding: 10px 22px;
+  border: 2px solid white;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.signin:hover {
+  background: white;
+  color: #e74c3c;
+}
+
+.signup {
+  background: #e74c3c;
+  color: white;
+  padding: 12px 28px;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.signup:hover {
+  background: #c0392b;
+}
+
+/* Mobile hide */
+@media (max-width: 992px) {
+  .nav-menu, .auth { display: none; }
+  .logo { font-size: 1.8rem; }
+}

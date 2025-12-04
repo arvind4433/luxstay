@@ -81,6 +81,7 @@ const Sidebar = () => {
                 </div>
                 
                 <div className="col-lg-9 col-12 mt-3 ">
+                    
                     <h2 className="mb-4 fw-bolder Hotels-Listing text-dark ">Hotels Listing <span className="text-muted fs-5">(Showing 45 results)</span></h2>
                     
                 
