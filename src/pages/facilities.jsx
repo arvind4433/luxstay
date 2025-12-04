@@ -1,131 +1,104 @@
-// Facilities.jsx
-import { useState } from "react";
+import React, { useState } from "react";
 import "../css/Facilities.css";
 
-const facilities = [
+// 1. DUMMY DATA FOR FACILITIES
+const facilityData = [
   {
-    title: "HOTEL",
-    icon: "building",
-    items: [
-      "24/7 secure luggage storage",
-      "Non-smoking rooms",
-      "In-room dining",
-      "Concierge service",
-      "Business centre",
-      "Currency exchange"
-    ]
+    title: "ACADEMIC BLOCKS & LABS",
+    icon: "bi-building",
+    features: ["State-of-the-art Classrooms", "Advanced Research Labs", "High-speed Wi-Fi Campus", "Dedicated Computer Centers"],
   },
   {
-    title: "WELLNESS",
-    icon: "flower1",
-    items: [
-      "Fitness centre with modern equipment",
-      "J Wellness Spa",
-      "Outdoor swimming pool",
-      "Yoga & meditation room"
-    ]
+    title: "HOSTEL & ACCOMMODATION",
+    icon: "bi-house-door-fill",
+    features: ["Separate Boys and Girls Hostels", "24/7 Security and Warden", "Nutritious Mess Facilities", "Recreational Common Rooms"],
   },
   {
-    title: "DINING",
-    icon: "cup-hot",
-    items: [
-      "VISTA – Multi-cuisine restaurant",
-      "House of Ming – Chinese speciality",
-      "The Lobby Lounge",
-      "Poolside Bar"
-    ]
+    title: "CAFETERIA & DINING",
+    icon: "bi-cup-hot-fill",
+    features: ["Multi-cuisine Options Available", "Hygienic and Clean Environment", "Spacious Seating Area", "Snacks and Beverages Counter"],
   },
   {
-    title: "TRANSPORT",
-    icon: "car-front",
-    items: [
-      "Complimentary airport transfers",
-      "Luxury car rental",
-      "24/7 taxi service",
-      "Valet parking"
-    ]
-  }
+    title: "SPORTS & FITNESS",
+    icon: "bi-dribbble",
+    features: ["Outdoor Fields and Courts", "Indoor Games Area", "Modern Gymnasium", "Trained Sports Coaches"],
+  },
 ];
 
-export default function Facilities() {
-  const [openIndex, setOpenIndex] = useState(null);
 
-  const toggle = (index) => {
-    setOpenIndex(openIndex === index ? null : index);
+const Facilities = () => { // Corrected: const Facilities
+  const [activeIndex, setActiveIndex] = useState(null);
+
+  const toggleCard = (index) => {
+    // Allows closing the currently open card or opening a new one
+    setActiveIndex(activeIndex === index ? null : index);
+  };
+
+  const renderCards = (startIndex, endIndex) => {
+    return facilityData.slice(startIndex, endIndex).map((facility, index) => {
+      // Calculate the true index from the original array (0, 1, 2, 3)
+      const trueIndex = startIndex + index;
+      const isActive = activeIndex === trueIndex;
+
+      return (
+        <div
+          key={trueIndex}
+          className={`facility-card ${isActive ? "active" : ""}`}
+          onClick={() => toggleCard(trueIndex)}
+        >
+          <div className="card-header">
+            <div className="header-content">
+              {/* Used Bootstrap Icons based on the data */}
+              <i className={`bi ${facility.icon} icon`}></i> 
+              <h3>{facility.title}</h3>
+            </div>
+            {/* Changed '+' to a custom icon for better control */}
+            <i className={`bi bi-plus plus-icon`}></i>
+          </div>
+
+          <div className="card-body">
+            <ul>
+              {facility.features.map((feature, i) => (
+                <li key={i}>
+                  <span className="checkmark">✓</span> {feature}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      );
+    });
   };
 
   return (
-    <section className="facilities-section py-5 bg-light">
+    // Ensure you have Bootstrap linked for 'container', 'row', 'col-lg-6', 'g-4', and 'bi-*' icons
+    <section className="facilities-section">
       <div className="container">
-        {/* Title */}
+
         <div className="text-center mb-5">
-          <h2 className="fac-title">
-            <span className="fac-line"></span>
-            FACILITIES
-            <span className="fac-line"></span>
+          <h2 className="facilities-title">
+            <span className="line"></span>
+            CAMPUS FACILITIES
+            <span className="line"></span>
           </h2>
         </div>
 
         <div className="row g-4 justify-content-center">
-          {/* Left Side - 2 Boxes */}
-          <div className="col-lg-6">
-            {facilities.slice(0, 2).map((fac, index) => (
-              <div
-                key={index}
-                className={`fac-card ${openIndex === index ? "active" : ""}`}
-                onClick={() => toggle(index)}
-              >
-                <div className="fac-header">
-                  <div className="fac-icon-title">
-                    <i className={`bi bi-${fac.icon} me-3`}></i>
-                    <h4>{fac.title}</h4>
-                  </div>
-                  <span className="fac-arrow">+</span>
-                </div>
 
-                <div className="fac-body">
-                  <ul>
-                    {fac.items.map((item, i) => (
-                      <li key={i}>
-                        <span className="check-mark"></span> {item}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-            ))}
+          {/* Left Column - Cards 0 and 1 */}
+          <div className="col-lg-6">
+            {renderCards(0, 2)}
           </div>
 
-          {/* Right Side - 2 Boxes */}
+          {/* Right Column - Cards 2 and 3 */}
           <div className="col-lg-6">
-            {facilities.slice(2, 4).map((fac, index) => (
-              <div
-                key={index + 2}
-                className={`fac-card ${openIndex === index + 2 ? "active" : ""}`}
-                onClick={() => toggle(index + 2)}
-              >
-                <div className="fac-header">
-                  <div className="fac-icon-title">
-                    <i className={`bi bi-${fac.icon} me-3`}></i>
-                    <h4>{fac.title}</h4>
-                  </div>
-                  <span className="fac-arrow">+</span>
-                </div>
-
-                <div className="fac-body">
-                  <ul>
-                    {fac.items.map((item, i) => (
-                      <li key={i}>
-                        <span className="check-mark"></span> {item}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-            ))}
+            {renderCards(2, 4)}
           </div>
+
         </div>
       </div>
     </section>
   );
 }
+
+export default Facilities;

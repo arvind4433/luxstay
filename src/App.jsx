@@ -12,7 +12,7 @@ import ForgotPassword from "./pages/auth/ForgetPassword"
 
 import Addhotel from "./pages/auth/Addhotel"
 import ResetPassword from "./pages/auth/ResetPassword";
-import Facilities from "./pages/Facilities";
+import Facilities from "./pages/facilities";
 
 function App() {
   return (
@@ -22,7 +22,8 @@ function App() {
         <Route path="/" element={<Home />} />
 
         <Route path="/addhotel" element={<Addhotel />} />
-        <Route path="/facilities" element={<Facilities />} />
+        <Route path="/Facilities" element={<Facilities />} />
+        <Route path="/Video" element={<Video />} />
 
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
