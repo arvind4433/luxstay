@@ -93,8 +93,8 @@ const Video = () => {
             </div>
 
        
-            <button className="search-btn">
-              <i className="bi bi-search"></i> Search
+            <button className="search-btn rounded-pill py-2 me-3">
+              <i className="bi  bi-search"></i> Search
             </button>
           </div>
         </div>
