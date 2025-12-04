@@ -12,7 +12,7 @@ import ForgotPassword from "./pages/auth/ForgetPassword"
 
 import Addhotel from "./pages/auth/Addhotel"
 import ResetPassword from "./pages/auth/ResetPassword";
-import Facilities from "./pages/Facilities";
+import Facilities from "./pages/Facilities.jsx";
 
 function App() {
   return (
