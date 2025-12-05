@@ -120,7 +120,7 @@ const ResetPassword = () => {
 
                 <p className="text-center mb-0 small">
                   <Link
-                    to="/login"
+                    to="/signin"
                     className="text-primary fw-medium text-decoration-none"
                   >
                     Back to Login

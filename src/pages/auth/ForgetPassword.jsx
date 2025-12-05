@@ -97,7 +97,7 @@ const ForgotPassword = () => {
         )}
 
         <p className="back-login mt-3">
-          Remember your password? <Link to="/login">Back to Login</Link>
+          Remember your password? <Link to="/signin">Back to Login</Link>
         </p>
       </div>
     </div>

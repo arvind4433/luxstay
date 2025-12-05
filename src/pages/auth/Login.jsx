@@ -121,7 +121,7 @@ const response = await fetch(`/api/auth/verify-otp`, {
                   <input type="checkbox" id="remember" />
                   <label htmlFor="remember">Remember me</label>
                 </div>
-                <Link to="/ForgotPassword" className="forgot-link-new">
+                <Link to="/forgot-password" className="forgot-link-new">
                   Forgot Password?
                 </Link>
               </div>
