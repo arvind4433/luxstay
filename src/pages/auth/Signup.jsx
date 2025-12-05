@@ -22,7 +22,7 @@ const [image, setImage] = useState("");
     }
 
     try {
-      const res = await axios.post("https://api.bookmyhotelroom.online/auth/register", {
+      const res = await axios.post(`/api/auth/register`, {
         name,   
         email,
         password, 

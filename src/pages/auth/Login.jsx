@@ -22,7 +22,7 @@ const Login = () => {
     }
 
     try {
-      const res = await axios.post("https://api.bookmyhotelroom.online/auth/login", {
+      const res = await axios.post(`/api/auth/login`, {
         email,
         password,
       });
@@ -31,40 +31,35 @@ const Login = () => {
 
         localStorage.setItem("userEmail", email); 
         
-   
         alert("OTP sent to your email. Please verify.");
-        setOtpmodel(true);
-        
+        setOtpmodel(true); 
       
       } else {
         alert(res.data.message);
       }
     } catch (err) {
       console.error(err);
-      alert("Invalid email or password or server error");
+      alert(err.response.data.message || err.message);
     } finally {
       setLoading(false);
     }
   };
 
-
- 
   const handleverifyLogin = async (e) => {
     e.preventDefault();
     setLoading(true);
     
-   
     try {
       if (!otp) {
         throw new Error("Please enter the OTP.");
       }
 
-   
-      const response = await fetch("https://api.bookmyhotelroom.online/auth/verifylogin", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, otp }),
-      });
+const response = await fetch(`/api/auth/verify-otp`, {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({ email, otp, type: "login" }), 
+});
+
       
       const result = await response.json();
 
@@ -72,7 +67,7 @@ const Login = () => {
        
         alert(result.message);
      
-        window.location.href="/Home"
+        window.location.href="/"
       
       } else {
         throw new Error(result.message || "OTP verification failed. Try again!");

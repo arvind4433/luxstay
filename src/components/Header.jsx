@@ -1,27 +1,27 @@
-// Header.jsx
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import "../css/Header.css";
 
-const Header = () => {
+const Header = ({ user, setUser }) => {
   const [hovered, setHovered] = useState(false);
   const [hide, setHide] = useState(false);
 
-  // Scroll hide/show
   useEffect(() => {
     let lastScroll = 0;
     const handleScroll = () => {
       const current = window.pageYOffset;
-      if (current > lastScroll && current > 80) {
-        setHide(true);
-      } else {
-        setHide(false);
-      }
+      setHide(current > lastScroll && current > 80);
       lastScroll = current;
     };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  const handleLogout = () => {
+    if (window.confirm("Are you sure you want to logout?")) {
+      setUser(null);
+    }
+  };
 
   return (
     <header 
@@ -31,15 +31,10 @@ const Header = () => {
     >
       <div className="container d-flex justify-content-between align-items-center">
 
-        {/* Logo */}
-        <Link to="/" className="logo">
-          LUX<span className="red">STAY</span>
-        </Link>
+        <Link to="/" className="logo">LUX<span className="red">STAY</span></Link>
 
-        {/* Menu */}
         <nav className="nav-menu">
           <Link to="/" className="nav-link">Home</Link>
-          
           <div className="dropdown">
             <span className="nav-link">Rooms</span>
             <div className="dropdown-box">
@@ -48,7 +43,6 @@ const Header = () => {
               <Link to="/rooms/family">Family</Link>
             </div>
           </div>
-
           <div className="dropdown">
             <span className="nav-link">Offers</span>
             <div className="dropdown-box">
@@ -56,7 +50,6 @@ const Header = () => {
               <Link to="/offers/honeymoon">Honeymoon</Link>
             </div>
           </div>
-
           <div className="dropdown">
             <span className="nav-link">Contact</span>
             <div className="dropdown-box">
@@ -66,10 +59,18 @@ const Header = () => {
           </div>
         </nav>
 
-        {/* Right Buttons */}
         <div className="auth">
-          <Link to="/signin" className="signin">Sign In</Link>
-          <Link to="/signup" className="signup">Sign Up</Link>
+          {!user ? (
+            <>
+              <Link to="/signin" className="signin">Sign In</Link>
+              <Link to="/signup" className="signup">Sign Up</Link>
+            </>
+          ) : (
+            <>
+              <span className="user-email">{user.email}</span>
+              <button onClick={handleLogout} className="logout-btn">Logout</button>
+            </>
+          )}
         </div>
 
       </div>

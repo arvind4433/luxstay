@@ -25,7 +25,7 @@ const Addhotel = () => {
 
    
       
-      const res = await axios.post("https://api.bookmyhotelroom.online/api/hotels/addHotel", {
+      const res = await axios.post(`api/hotels/addHotel`, {
           name,
         rooms,
         location,

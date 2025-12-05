@@ -23,7 +23,7 @@ const ResetPassword = () => {
     const token=  window.location.pathname.split("/ResetPassword/")[1]
 
    
-       const response = await fetch("http://localhost:5000/auth/updatePassword", {
+       const response = await fetch(`/api/auth/updatePassword`, {
         method: "POST",
         headers: { "Content-Type": "application/json", "authorization" :token },
         body: JSON.stringify({ newPassword }),
