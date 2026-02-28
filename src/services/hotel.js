@@ -1,9 +1,9 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-
+import baseQuery from "./baseAPI";
 export const HotelAPI = createApi({
   reducerPath: "hotelAPI",
-  baseQuery: fetchBaseQuery({ baseUrl: "http://127.0.0.1:5000/api/hotel" }),
-  endpoints: (builder) => ({
+  baseQuery: baseQuery,
+   endpoints: (builder) => ({
 
     getHotelAll: builder.query({
       query: () => ({
