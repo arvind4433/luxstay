@@ -1,8 +1,7 @@
 import { fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 const baseQuery = fetchBaseQuery({
-    baseUrl: 'https://api.bookmyhotelroom.online/api',
-     credentials: "include", 
+    baseUrl: 'http://127.0.0.1:5000/api',
 prepareHeaders: (headers) => {
   const token = localStorage.getItem("token");
   if (token) {

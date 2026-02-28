@@ -4,6 +4,7 @@ import { useSelector } from "react-redux"
 import { useModal } from "../hooks/ModalContext"
 import Header from "../components/Header"
 import Footer from "../components/Footer"
+import SessionTimer from "../components/SessionTimer"
 
 const AppLayout = () => {
     const location = useLocation();
@@ -20,6 +21,7 @@ const AppLayout = () => {
 
     return (
         <>
+            <SessionTimer />
             <Header />
             <main className={location.pathname === "/" ? "" : "pt-32"}>
                 <Outlet />

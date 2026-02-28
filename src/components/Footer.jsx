@@ -232,7 +232,7 @@ export default function Footer() {
                 href="mailto:concierge@luxstay.com"
                 className="flex items-center gap-3 text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-red-600 dark:hover:text-red-400 transition-colors group"
               >
-                <div className="w-8 h-8 rounded-lg bg-gray-50 dark:bg-gray-800 flex items-center justify-center text-red-500 group-hover:bg-red-500 group-hover:text-white transition-all">
+                <div className="w- hidden md:block h-8 rounded-lg bg-gray-50 dark:bg-gray-800 flex items-center justify-center text-red-500 group-hover:bg-red-500 group-hover:text-white transition-all">
                   <Mail size={16} />
                 </div>
                 concierge@luxstay.com
@@ -265,8 +265,8 @@ export default function Footer() {
                 </p>
               </div>
 
-              <form onSubmit={handleNewsletterSubmit} className="flex flex-col sm:flex-row gap-3">
-                <div className="flex-1">
+              <form onSubmit={handleNewsletterSubmit} className="flex flex-col sm:flex-row gap-3 w-full">
+                <div className="flex-1 w-full min-w-0">
                   <input
                     type="email"
                     value={email}
@@ -278,7 +278,7 @@ export default function Footer() {
                 </div>
                 <button
                   type="submit"
-                  className="px-8 py-3.5 bg-red-600 hover:bg-red-700 text-white text-sm font-bold rounded-2xl transition shadow-xl shadow-red-600/20 whitespace-nowrap active:scale-95"
+                  className="w-full sm:w-auto px-8 py-3.5 bg-red-600 hover:bg-red-700 text-white text-sm font-bold rounded-2xl transition shadow-xl shadow-red-600/20 whitespace-nowrap active:scale-95 shrink-0"
                 >
                   Join the Club
                 </button>
@@ -292,12 +292,12 @@ export default function Footer() {
               )}
 
               {/* Payment Methods */}
-              <div className="flex items-center gap-6 pt-2">
-                <span className="text-[10px] font-black text-gray-400 uppercase tracking-widest flex items-center gap-2">
+              <div className="flex   flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6 pt-2">
+                <span className="text-[10px] font-black text-gray-400 uppercase tracking-widest flex items-center gap-2 shrink-0">
                   <Shield size={14} className="text-red-500" />
                   Secure Protocol
                 </span>
-                <div className="flex items-center gap-3">
+                <div className="flex flex-wrap items-center gap-2 sm:gap-3">
                   {[
                     { label: "VISA", color: "bg-blue-600/10 text-blue-600 border-blue-600/20" },
                     { label: "MC", color: "bg-orange-600/10 text-orange-600 border-orange-600/20" },

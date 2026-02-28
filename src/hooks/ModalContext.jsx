@@ -4,6 +4,7 @@ import Login from "../components/Forms/Login";
 import Register from '../components/Forms/Register';
 import ForgotPassword from '../components/Forms/Forgot';
 import VerifyOTP from '../components/Auth/VerifyOtp';
+import ResetPassword from '../components/Forms/Reset';
 // Create the context
 const ModalContext = createContext({
   isOpen: false,
@@ -61,6 +62,7 @@ export const ModalProvider = ({ children }) => {
                 {modalContent == "register" && <Register />}
                 {modalContent == "forgot" && <ForgotPassword />}
                 {modalContent == "otp" && <VerifyOTP user={modalData} />}
+                {modalContent == "reset" && <ResetPassword data={modalData} />}
               </div>
 
 
