@@ -1,23 +1,24 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { createApi } from "@reduxjs/toolkit/query/react";
 import baseQuery from "./baseAPI";
+
 export const BookingAPI = createApi({
-    reducerPath: "bookingAPI",
+  reducerPath: "bookingAPI",
   baseQuery: baseQuery,
-    endpoints: (builder) => ({
-        confirmBooking: builder.mutation({
-            query: (body) => ({
-                url: "/confirm",
-                method: "POST",
-                body,
-            }),
-        }),
-        getMyBookings: builder.query({
-            query: () => ({
-                url: "/my-bookings",
-                method: "GET",
-            }),
-        }),
+  endpoints: (builder) => ({
+    confirmBooking: builder.mutation({
+      query: (body) => ({
+        url: "/booking/confirm",
+        method: "POST",
+        body,
+      }),
     }),
+    getMyBookings: builder.query({
+      query: () => ({
+        url: "/booking/my-bookings",
+        method: "GET",
+      }),
+    }),
+  }),
 });
 
 export const { useConfirmBookingMutation, useGetMyBookingsQuery } = BookingAPI;
