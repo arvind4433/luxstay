@@ -52,6 +52,12 @@ export const AuthAPI = createApi({
         body,
       }),
     }),
+    getUser: builder.query({
+      query: () => ({
+        url: "/user/get",
+        method: "GET",
+      }),
+    }),
 
   
   }),
@@ -62,7 +68,6 @@ export const {
   useVerifyOtpMutation,
   useResendOtpMutation,
   useRegisterMutation,
-  useUpdatePasswordMutation,
   useForgotPasswordMutation,
   useResetPasswordMutation,
   useGetUserQuery,
