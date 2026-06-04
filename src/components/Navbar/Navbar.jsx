@@ -3,8 +3,7 @@ import { Link, NavLink, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { motion, AnimatePresence } from "framer-motion";
 import {
-  Hotel, Bell, User, LogOut, Settings, BookOpen,
-  Tag, Menu, X, ChevronDown, ShoppingCart,
+  Bell, User, LogOut, BookOpen, ShoppingCart,
 } from "lucide-react";
 import { logout } from "../../store/authSlice";
 import { useGetNotificationsQuery } from "../../redux/apiSlice";
@@ -18,17 +17,34 @@ export default function Navbar() {
   const { isAuthenticated, user } = useSelector((s) => s.auth);
   const cartCount = useSelector((s) => s.cart.items.length);
   const [scrolled, setScrolled] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const dropdownRef = useRef(null);
+  const lastScrollYRef = useRef(0);
 
   const { data: notifData } = useGetNotificationsQuery(undefined, {
     skip: !isAuthenticated,
   });
   const unreadCount = notifData?.data?.filter((n) => !n.isRead)?.length || 0;
-
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20);
+    const onScroll = () => {
+      const currentScrollY = window.scrollY;
+      setScrolled(currentScrollY > 20);
+
+      if (currentScrollY <= 16) {
+        setIsVisible(true);
+      } else if (currentScrollY > lastScrollYRef.current && currentScrollY > 96) {
+        setIsVisible(false);
+        setDropdownOpen(false);
+        setMobileOpen(false);
+      } else if (currentScrollY < lastScrollYRef.current) {
+        setIsVisible(true);
+      }
+
+      lastScrollYRef.current = currentScrollY;
+    };
+
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
@@ -69,13 +85,16 @@ export default function Navbar() {
   ];
 
   return (
-    <nav className={`navbar ${scrolled ? "scrolled" : ""}`}>
+    <nav className={`navbar ${scrolled ? "scrolled" : ""} ${isVisible ? "navbar--visible" : "navbar--hidden"}`}>
       {/* Logo */}
       <Link to="/" className="navbar__logo">
         <div className="navbar__logo-icon">L</div>
-        <span className="navbar__logo-text">
-          Lux<span>Stay</span>
-        </span>
+        <div className="navbar__logo-copy">
+          <span className="navbar__logo-text">
+            Lux<span>Stay</span>
+          </span>
+          <span className="navbar__logo-tag">Luxury escapes</span>
+        </div>
       </Link>
 
       {/* Desktop Nav Links */}
@@ -182,9 +201,6 @@ export default function Navbar() {
             <Link to="/auth/login" className="navbar__btn navbar__btn--ghost">
               Sign In
             </Link>
-            <Link to="/auth/register" className="navbar__btn navbar__btn--primary">
-              Get Started
-            </Link>
           </>
         )}
 
@@ -248,9 +264,6 @@ export default function Navbar() {
                 <div className="navbar__mobile-auth">
                   <Link to="/auth/login" className="navbar__btn navbar__btn--ghost" onClick={() => setMobileOpen(false)}>
                     Sign In
-                  </Link>
-                  <Link to="/auth/register" className="navbar__btn navbar__btn--primary" onClick={() => setMobileOpen(false)}>
-                    Get Started
                   </Link>
                 </div>
               )}

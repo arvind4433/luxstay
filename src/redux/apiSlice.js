@@ -51,7 +51,15 @@ export const api = createApi({
     // ─── Rooms ───────────────────────────────────────────────────────
     // GET /api/room/hotel/:hotelId
     getRooms: builder.query({
-      query: (hotelId) => `/room/hotel/${hotelId}`,
+      query: (arg) => {
+        if (typeof arg === "string") return `/room/hotel/${arg}`;
+
+        const { hotelId, ...params } = arg || {};
+        return {
+          url: `/room/hotel/${hotelId}`,
+          params,
+        };
+      },
       providesTags: ["Rooms"],
       transformResponse: (res) => res.data || [],
     }),

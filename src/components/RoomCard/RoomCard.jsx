@@ -1,7 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import toast from "react-hot-toast";
-import { Wifi, Coffee, AirVent, Tv, Users, Maximize, BedDouble } from "lucide-react";
+import { Wifi, Coffee, AirVent, Tv, Users, Maximize, BedDouble, BadgeCheck } from "lucide-react";
 import "./RoomCard.css";
 import { formatPrice, getPriceValue } from "../../utils/price";
 import { useAuthCheck } from "../../hooks/useAuthCheck";
@@ -30,7 +30,9 @@ export default function RoomCard({ room, hotelId, checkIn, checkOut }) {
   const navigate = useNavigate();
   const cartItems = useSelector((state) => state.cart.items);
   const { isAuthenticated, handleAuthorizedAction } = useAuthCheck();
-  const isAvailable = room?.available !== false;
+
+  const availableRooms = Number(room?.availableRooms || 0);
+  const isAvailable = availableRooms > 0 && room?.status !== "sold_out";
 
   const imgSrc =
     room?.images?.[0]?.startsWith("http")
@@ -72,33 +74,35 @@ export default function RoomCard({ room, hotelId, checkIn, checkOut }) {
         <img
           className="room-card__img"
           src={imgSrc}
-          alt={room?.name || room?.type}
+          alt={room?.roomTypeName || room?.name}
           loading="lazy"
           onError={(event) => {
             event.target.src = "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=600&q=80";
           }}
         />
         <div className={`room-card__availability ${isAvailable ? "available" : "unavailable"}`}>
-          {isAvailable ? "Available" : "Booked"}
+          {isAvailable ? `${availableRooms} left` : "Sold out"}
         </div>
       </div>
 
       <div className="room-card__body">
-        <div className="room-card__type">{room?.type || "Standard"}</div>
-        <div className="room-card__name">{room?.name || "Deluxe Room"}</div>
+        <div className="room-card__eyebrow">
+          <span className="room-card__type">{room?.roomTypeCode || room?.type || "Room"}</span>
+          <span className="room-card__inventory">{room?.totalRooms || 0} total keys</span>
+        </div>
+
+        <div className="room-card__name">{room?.roomTypeName || room?.name || "Deluxe Room"}</div>
         {room?.description && <div className="room-card__desc">{room.description}</div>}
 
         <div className="room-card__specs">
-          {room?.maxGuests && (
-            <div className="room-card__spec">
-              <Users size={14} />
-              {room.maxGuests} Guests
-            </div>
-          )}
-          {room?.size && (
+          <div className="room-card__spec">
+            <Users size={14} />
+            {room?.maxAdults || 2} adults{room?.maxChildren ? `, ${room.maxChildren} children` : ""}
+          </div>
+          {room?.roomSize && (
             <div className="room-card__spec">
               <Maximize size={14} />
-              {room.size} m2
+              {room.roomSize} sq ft
             </div>
           )}
           {room?.bedType && (
@@ -128,12 +132,14 @@ export default function RoomCard({ room, hotelId, checkIn, checkOut }) {
             <div className="room-card__price">
               {formatPrice(price)} <span>/ night</span>
             </div>
+            {isAvailable && (
+              <div className="room-card__assurance">
+                <BadgeCheck size={13} /> Free cancellation on select rates
+              </div>
+            )}
           </div>
           <div className="room-card__actions">
-            <Link
-              to={`/room/${room?._id}`}
-              className="room-card__view-btn"
-            >
+            <Link to={`/room/${room?._id}`} className="room-card__view-btn">
               View
             </Link>
             <button

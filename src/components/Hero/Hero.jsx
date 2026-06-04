@@ -104,7 +104,7 @@ const Hero = () => {
       {/* Background Image */}
       <div className="absolute inset-0 w-full h-full">
         <img
-          src="/images/hero-luxury.jpg"
+          src="/images/homepage/HOME%20MAIN%20PIC.png"
           alt="Luxury Hotel"
           className="w-full h-full object-cover scale-[1.02] transition-transform duration-[10000ms] ease-out"
           style={{ transform: isLoaded ? 'scale(1)' : 'scale(1.05)' }}

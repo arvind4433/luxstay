@@ -1,0 +1,40 @@
+{
+  "hotels": [
+    {
+      "_id": "mock-hotel-1",
+      "name": "The Oberoi Udaivilas",
+      "city": "Udaipur",
+      "state": "Rajasthan",
+      "price": 28999,
+      "rating": 4.9,
+      "badge": "Lake Palace",
+      "highlight": "Lakeside suites, private courtyards, and a ceremonial arrival that feels unmistakably grand.",
+      "tags": ["Lake View", "Private Pool", "Fine Dining"],
+      "image": "https://images.unsplash.com/photo-1578683010236-d716f9a3f461?w=1400&q=80"
+    },
+    {
+      "_id": "mock-hotel-6",
+      "name": "Taj Falaknuma Palace",
+      "city": "Hyderabad",
+      "state": "Telangana",
+      "price": 24500,
+      "rating": 4.8,
+      "badge": "Royal Escape",
+      "highlight": "Historic palace living with curated dining rooms, marble corridors, and skyline-facing terraces.",
+      "tags": ["Palace Stay", "Butler Service", "City Views"],
+      "image": "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=1400&q=80"
+    },
+    {
+      "_id": "mock-hotel-11",
+      "name": "Kumarakom Lake Resort",
+      "city": "Kumarakom",
+      "state": "Kerala",
+      "price": 18600,
+      "rating": 4.7,
+      "badge": "Backwater Retreat",
+      "highlight": "Waterfront villas, ayurvedic experiences, and a quieter luxury rhythm for slow travel.",
+      "tags": ["Backwater", "Spa", "Villa Stay"],
+      "image": "https://images.unsplash.com/photo-1522798514-97ceb8c4f1c8?w=1400&q=80"
+    }
+  ]
+}

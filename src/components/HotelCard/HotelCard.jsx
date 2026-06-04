@@ -1,6 +1,6 @@
 import { memo, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { MapPin, Star, Heart } from "lucide-react";
+import { MapPin, Star, Heart, BedDouble, Sparkles } from "lucide-react";
 import "./HotelCard.css";
 import { formatPrice, getPriceValue } from "../../utils/price";
 import { STORAGE_KEYS, readStorage, toggleStoredId } from "../../utils/storage";
@@ -40,9 +40,6 @@ function HotelCardComponent({ hotel, skeleton = false }) {
           <div className="skeleton-line skeleton-line--lg" />
           <div className="skeleton-line skeleton-line--md" />
         </div>
-        <div className="hotel-card__footer">
-          <div className="skeleton-line skeleton-line--md" />
-        </div>
       </div>
     );
   }
@@ -59,6 +56,7 @@ function HotelCardComponent({ hotel, skeleton = false }) {
   const reviewCount = hotel?.reviewCount || hotel?.totalReviews || 0;
   const stars = hotel?.starRating || hotel?.stars || 4;
   const location = hotel?.location?.city || hotel?.address?.city || hotel?.city || "Unknown Location";
+  const roomTypes = hotel?.roomTypes?.slice(0, 2) || [];
 
   const handleWishlistToggle = (event) => {
     event.preventDefault();
@@ -78,8 +76,15 @@ function HotelCardComponent({ hotel, skeleton = false }) {
             event.target.src = "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=600&q=80";
           }}
         />
-        {stars >= 5 && <div className="hotel-card__badge">Luxury</div>}
-        {stars >= 4 && stars < 5 && <div className="hotel-card__badge">Premium</div>}
+        <div className="hotel-card__topline">
+          <div className="hotel-card__badge">{hotel?.propertyType || "Hotel"}</div>
+          {hotel?.isFeatured && (
+            <div className="hotel-card__featured">
+              <Sparkles size={12} />
+              Featured
+            </div>
+          )}
+        </div>
         <button
           className={`hotel-card__wishlist${liked ? " active" : ""}`}
           onClick={handleWishlistToggle}
@@ -93,10 +98,11 @@ function HotelCardComponent({ hotel, skeleton = false }) {
         <div className="hotel-card__location">
           <MapPin size={12} />
           {location}
-          {hotel?.location?.country ? `, ${hotel.location.country}` : ""}
+          {hotel?.address?.state ? `, ${hotel.address.state}` : ""}
         </div>
         <div className="hotel-card__name">{hotel?.name}</div>
         <StarRating rating={stars} />
+
         <div className="hotel-card__meta">
           {rating > 0 && (
             <div className="hotel-card__rating">
@@ -109,11 +115,24 @@ function HotelCardComponent({ hotel, skeleton = false }) {
           )}
           {reviewCount > 0 && <span className="hotel-card__review-count">{reviewCount} reviews</span>}
         </div>
+
+        <div className="hotel-card__inventory">
+          <span><BedDouble size={13} /> {hotel?.roomCount || 0} room types</span>
+          <span>{hotel?.availableInventory || 0} rooms open</span>
+        </div>
+
+        {roomTypes.length > 0 && (
+          <div className="hotel-card__room-types">
+            {roomTypes.map((type) => (
+              <span key={type}>{type}</span>
+            ))}
+          </div>
+        )}
       </div>
 
       <div className="hotel-card__footer">
         <div className="hotel-card__price">
-          <span className="hotel-card__price-label">Per Night</span>
+          <span className="hotel-card__price-label">Starting from</span>
           <div className="hotel-card__price-value">
             {formatPrice(price)} <span>/ night</span>
           </div>

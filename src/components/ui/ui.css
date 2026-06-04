@@ -5,9 +5,10 @@
   gap: 0.6rem;
   border: 1px solid transparent;
   border-radius: 999px;
-  font-weight: 700;
+  font-weight: 800;
   cursor: pointer;
   text-decoration: none;
+  letter-spacing: 0.01em;
   transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
 }
 
@@ -20,46 +21,51 @@
 }
 
 .ui-button:disabled {
-  opacity: 0.6;
+  opacity: 0.62;
   cursor: not-allowed;
 }
 
 .ui-button--sm {
-  padding: 0.6rem 1rem;
-  font-size: 0.85rem;
+  padding: 0.65rem 1rem;
+  font-size: 0.84rem;
 }
 
 .ui-button--md {
-  padding: 0.85rem 1.35rem;
-  font-size: 0.95rem;
+  padding: 0.9rem 1.4rem;
+  font-size: 0.94rem;
 }
 
 .ui-button--lg {
-  padding: 1rem 1.6rem;
+  padding: 1rem 1.7rem;
   font-size: 1rem;
 }
 
 .ui-button--primary {
-  background: linear-gradient(135deg, #1e3a8a, #2563eb);
+  background: linear-gradient(135deg, #0f766e, #115e59);
   color: #fff;
-  box-shadow: 0 16px 30px rgba(37, 99, 235, 0.2);
+  box-shadow: 0 16px 30px rgba(15, 118, 110, 0.2);
 }
 
 .ui-button--primary:hover:not(:disabled) {
-  box-shadow: 0 20px 34px rgba(37, 99, 235, 0.28);
+  box-shadow: 0 20px 34px rgba(15, 118, 110, 0.28);
 }
 
 .ui-button--secondary {
   background: #fff;
-  border-color: rgba(30, 58, 138, 0.12);
-  color: #0f172a;
-  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.06);
+  border-color: rgba(23, 32, 51, 0.1);
+  color: #172033;
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.05);
+}
+
+.ui-button--secondary:hover:not(:disabled) {
+  border-color: rgba(15, 118, 110, 0.22);
+  color: #0f766e;
 }
 
 .ui-button--ghost {
   background: transparent;
-  border-color: rgba(30, 58, 138, 0.14);
-  color: #1e3a8a;
+  border-color: rgba(23, 32, 51, 0.12);
+  color: #0f766e;
 }
 
 .ui-button__spinner {
@@ -78,10 +84,11 @@
   justify-content: center;
   gap: 0.9rem;
   padding: 3rem 1.5rem;
-  background: linear-gradient(180deg, rgba(255,255,255,0.9), rgba(248,250,252,0.95));
-  border: 1px dashed rgba(30, 58, 138, 0.16);
+  background: linear-gradient(180deg, rgba(255,255,255,0.95), rgba(249,250,251,0.98));
+  border: 1px dashed rgba(23, 32, 51, 0.14);
   border-radius: 24px;
   text-align: center;
+  box-shadow: 0 14px 32px rgba(15, 23, 42, 0.04);
 }
 
 .ui-empty-state__icon {
@@ -90,21 +97,21 @@
   display: grid;
   place-items: center;
   border-radius: 20px;
-  background: rgba(30, 58, 138, 0.08);
-  color: #1e3a8a;
+  background: rgba(15, 118, 110, 0.08);
+  color: #0f766e;
   font-size: 1.6rem;
 }
 
 .ui-empty-state__title {
   margin: 0;
   font-size: 1.2rem;
-  color: #0f172a;
+  color: #172033;
 }
 
 .ui-empty-state__message {
   max-width: 36rem;
   margin: 0;
-  color: #64748b;
+  color: #69758a;
   line-height: 1.7;
 }
 

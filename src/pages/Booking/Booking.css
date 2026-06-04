@@ -322,7 +322,30 @@
 
 .booking-sidebar {
   position: sticky;
-  top: 96px;
+  top: 84px;
+  align-self: start;
+  max-height: calc(100vh - 96px);
+  overflow-y: auto;
+  padding-right: 6px;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(100, 116, 139, 0.28) transparent;
+}
+
+.booking-sidebar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.booking-sidebar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.booking-sidebar::-webkit-scrollbar-thumb {
+  background: rgba(100, 116, 139, 0.22);
+  border-radius: 999px;
+}
+
+.booking-sidebar::-webkit-scrollbar-thumb:hover {
+  background: rgba(100, 116, 139, 0.34);
 }
 
 .booking-summary-card {
@@ -521,6 +544,9 @@
 
   .booking-sidebar {
     position: static;
+    max-height: none;
+    overflow: visible;
+    padding-right: 0;
   }
 
   .booking-hero {

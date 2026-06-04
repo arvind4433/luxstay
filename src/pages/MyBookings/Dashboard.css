@@ -19,10 +19,31 @@
   background-color: var(--bg-secondary);
   border-radius: var(--radius-2xl);
   padding: var(--spacing-6);
-  height: fit-content;
   position: sticky;
-  top: 100px;
+  top: 84px;
+  align-self: start;
+  max-height: calc(100vh - 96px);
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(100, 116, 139, 0.28) transparent;
   box-shadow: var(--shadow-md);
+}
+
+.dashboard-sidebar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.dashboard-sidebar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.dashboard-sidebar::-webkit-scrollbar-thumb {
+  background: rgba(100, 116, 139, 0.22);
+  border-radius: 999px;
+}
+
+.dashboard-sidebar::-webkit-scrollbar-thumb:hover {
+  background: rgba(100, 116, 139, 0.34);
 }
 
 .sidebar-header {
@@ -584,6 +605,8 @@
   .dashboard-sidebar {
     position: relative;
     top: auto;
+    max-height: none;
+    overflow: visible;
   }
 
   .sidebar-nav {

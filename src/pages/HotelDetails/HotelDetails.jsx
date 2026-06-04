@@ -32,9 +32,23 @@ export default function HotelDetails() {
   const [checkOut, setCheckOut] = useState("");
   const [guests, setGuests] = useState(1);
   const [imgIdx, setImgIdx] = useState(0);
+  const [roomFilters, setRoomFilters] = useState({
+    minPrice: "",
+    maxPrice: "",
+    roomType: "",
+    availableOnly: false,
+    sort: "price_asc",
+  });
 
   const { data: hotel, isLoading, isError, refetch } = useGetHotelQuery(id);
-  const { data: rooms = [] } = useGetRoomsQuery(id);
+  const { data: roomResults } = useGetRoomsQuery({
+    hotelId: id,
+    minPrice: roomFilters.minPrice || undefined,
+    maxPrice: roomFilters.maxPrice || undefined,
+    roomType: roomFilters.roomType || undefined,
+    availableOnly: roomFilters.availableOnly || undefined,
+    sort: roomFilters.sort,
+  });
   const { data: reviews = [] } = useGetReviewsQuery(id);
 
   useEffect(() => {
@@ -57,9 +71,10 @@ export default function HotelDetails() {
     );
   }, [hotel]);
 
-  const displayRooms = useMemo(() => (rooms.length > 0 ? rooms : hotel?.rooms || []), [hotel?.rooms, rooms]);
+  const displayRooms = useMemo(() => roomResults ?? hotel?.rooms ?? [], [hotel?.rooms, roomResults]);
   const displayReviews = useMemo(() => (reviews.length > 0 ? reviews : hotel?.reviews || []), [hotel?.reviews, reviews]);
   const price = getPriceValue(hotel);
+  const roomTypes = useMemo(() => [...new Set((hotel?.rooms || []).map((room) => room.roomTypeName).filter(Boolean))], [hotel?.rooms]);
 
   const nights = useMemo(() => {
     if (!checkIn || !checkOut) return 1;
@@ -134,6 +149,21 @@ export default function HotelDetails() {
             </div>
           </div>
 
+          <div className="hotel-details__highlight-row">
+            <div className="hotel-details__highlight-card">
+              <strong>{hotel.roomCount || displayRooms.length}</strong>
+              <span>Curated room types</span>
+            </div>
+            <div className="hotel-details__highlight-card">
+              <strong>{hotel.availableInventory || 0}</strong>
+              <span>Rooms currently open</span>
+            </div>
+            <div className="hotel-details__highlight-card">
+              <strong>{formatPrice(hotel.priceRange?.min || price)}</strong>
+              <span>Entry rate</span>
+            </div>
+          </div>
+
           <div className="hotel-details__section-title">About</div>
           <p className="hotel-details__desc">{hotel.description || "Experience luxury and comfort at its finest."}</p>
 
@@ -149,6 +179,50 @@ export default function HotelDetails() {
           )}
 
           <div className="hotel-details__section-title">Available Rooms</div>
+          <div className="hotel-details__filters">
+            <input
+              className="hotel-details__filter-input"
+              type="number"
+              placeholder="Min price"
+              value={roomFilters.minPrice}
+              onChange={(event) => setRoomFilters((prev) => ({ ...prev, minPrice: event.target.value }))}
+            />
+            <input
+              className="hotel-details__filter-input"
+              type="number"
+              placeholder="Max price"
+              value={roomFilters.maxPrice}
+              onChange={(event) => setRoomFilters((prev) => ({ ...prev, maxPrice: event.target.value }))}
+            />
+            <select
+              className="hotel-details__filter-input"
+              value={roomFilters.roomType}
+              onChange={(event) => setRoomFilters((prev) => ({ ...prev, roomType: event.target.value }))}
+            >
+              <option value="">All room styles</option>
+              {roomTypes.map((type) => (
+                <option key={type} value={type}>{type}</option>
+              ))}
+            </select>
+            <select
+              className="hotel-details__filter-input"
+              value={roomFilters.sort}
+              onChange={(event) => setRoomFilters((prev) => ({ ...prev, sort: event.target.value }))}
+            >
+              <option value="price_asc">Price: Low to High</option>
+              <option value="price_desc">Price: High to Low</option>
+              <option value="size_desc">Largest Rooms</option>
+            </select>
+            <label className="hotel-details__filter-switch">
+              <input
+                type="checkbox"
+                checked={roomFilters.availableOnly}
+                onChange={(event) => setRoomFilters((prev) => ({ ...prev, availableOnly: event.target.checked }))}
+              />
+              <span>Show only available</span>
+            </label>
+          </div>
+
           <div className="hotel-details__rooms">
             {displayRooms.length > 0 ? (
               displayRooms.map((room) => (
@@ -158,11 +232,11 @@ export default function HotelDetails() {
               ))
             ) : (
               <EmptyState
-                icon="🛏"
-                title="No rooms available yet"
-                message="This hotel page is live, but room inventory has not been published yet."
-                actionLabel="Browse other hotels"
-                onAction={() => navigate("/hotels")}
+                icon="Room"
+                title="No rooms match these filters"
+                message="Try widening the budget or turning off availability filtering to see more options."
+                actionLabel="Reset room filters"
+                onAction={() => setRoomFilters({ minPrice: "", maxPrice: "", roomType: "", availableOnly: false, sort: "price_asc" })}
               />
             )}
           </div>
@@ -172,14 +246,14 @@ export default function HotelDetails() {
               <div className="hotel-details__section-title">Guest Reviews</div>
               <div className="hotel-details__reviews">
                 {displayReviews.slice(0, 5).map((review, index) => (
-                  <div key={review._id || index} style={{ background: "#f8fafc", borderRadius: 12, padding: "1rem 1.25rem", border: "1px solid rgba(30,58,138,0.07)" }}>
+                  <div key={review._id || index} className="hotel-details__review-card">
                     <div style={{ display: "flex", gap: 3, marginBottom: "0.5rem" }}>
                       {[1, 2, 3, 4, 5].map((star) => (
                         <Star key={star} size={13} fill={star <= review.rating ? "#fbbf24" : "none"} color={star <= review.rating ? "#fbbf24" : "#e2e8f0"} />
                       ))}
                     </div>
-                    <p style={{ fontSize: "0.875rem", color: "#475569", lineHeight: 1.7, margin: "0 0 0.5rem" }}>&quot;{review.comment}&quot;</p>
-                    <div style={{ fontSize: "0.78rem", color: "#94a3b8" }}>by {review.userId?.name || review.user?.name || "Guest"}</div>
+                    <p>&quot;{review.comment}&quot;</p>
+                    <div>by {review.userId?.name || review.user?.name || "Guest"}</div>
                   </div>
                 ))}
               </div>
@@ -221,19 +295,20 @@ export default function HotelDetails() {
             >
               {displayRooms.length > 0 ? "Reserve Now" : "View Availability"}
             </button>
-            <div style={{ marginTop: "1rem", fontSize: "0.78rem", color: "#64748b", textAlign: "center" }}>
+            <div className="hotel-details__book-note">
               Free cancellation · Best price guarantee
             </div>
           </div>
 
-          <div style={{ marginTop: "1rem", background: "white", borderRadius: 14, padding: "1.25rem", border: "1px solid rgba(30,58,138,0.08)", fontSize: "0.82rem" }}>
+          <div className="hotel-details__sidebar-card">
             {displayRooms.length > 0 && (
-              <div style={{ color: "#15803d", fontWeight: 600, marginBottom: "0.5rem" }}>
-                {displayRooms.length} room type{displayRooms.length > 1 ? "s" : ""} available
+              <div className="hotel-details__sidebar-availability">
+                {displayRooms.length} room type{displayRooms.length > 1 ? "s" : ""} visible
               </div>
             )}
-            <div style={{ color: "#64748b" }}>Location: {hotel.address?.city || hotel.location?.city}, {hotel.address?.state || "India"}</div>
-            {hotel.contact?.phone && <div style={{ color: "#64748b", marginTop: "0.25rem" }}>Phone: {hotel.contact.phone}</div>}
+            <div>Location: {hotel.address?.city || hotel.location?.city}, {hotel.address?.state || "India"}</div>
+            {hotel.contact?.phone && <div style={{ marginTop: "0.35rem" }}>Phone: {hotel.contact.phone}</div>}
+            {hotel.policies?.checkInTime && <div style={{ marginTop: "0.35rem" }}>Check-in: {hotel.policies.checkInTime}</div>}
           </div>
         </div>
       </div>

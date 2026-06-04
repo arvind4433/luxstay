@@ -3,6 +3,7 @@ import toast from "react-hot-toast";
 import { logout } from "../store/authSlice";
 import { getApiBaseUrl, getApiErrorMessage } from "../utils/api";
 import { STORAGE_KEYS } from "../utils/storage";
+import { getMockApiResponse } from "../mocks/mockApi";
 
 const rawBaseQuery = fetchBaseQuery({
   baseUrl: getApiBaseUrl(),
@@ -17,6 +18,18 @@ const rawBaseQuery = fetchBaseQuery({
 
 const baseQueryWithFeedback = async (args, api, extraOptions) => {
   const result = await rawBaseQuery(args, api, extraOptions);
+
+  const shouldTryMock =
+    import.meta.env.VITE_FORCE_MOCK_DATA === "true" ||
+    result.error?.status === "FETCH_ERROR" ||
+    result.error?.status === "PARSING_ERROR";
+
+  if (shouldTryMock) {
+    const mockResult = getMockApiResponse(args);
+    if (mockResult) {
+      return mockResult;
+    }
+  }
 
   if (result.error) {
     const status = result.error.status;

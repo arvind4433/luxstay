@@ -1,12 +1,11 @@
 import { useState, useEffect, useRef } from "react";
-import { ChevronDown, Menu, X, Moon, Sun, User, LogOut, Heart, Calendar, ShoppingCart, Bell, Ticket, MapPin, Sparkles, Settings, HelpCircle, Code2 } from "lucide-react";
+import { ChevronDown, Menu, X, Moon, Sun, User, LogOut, Calendar, ShoppingCart, Settings, HelpCircle } from "lucide-react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useTheme } from "../../hooks/ThemeContext";
 import { useModal } from "../../hooks/ModalContext";
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../../store/authSlice";
 import { clearCart } from "../../store/cartSlice";
-import { MakeASiteLogoIcon, MakeASiteLogoBrand } from "../Logo/MakeASiteLogo";
 
 const navigationLinks = [
   { label: "Home", path: "/" },
@@ -135,35 +134,42 @@ export default function Header() {
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
         className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-700 ${isScrolled || !isHomePage || isHovered
-          ? "bg-white dark:bg-black lg:bg-white/95 lg:dark:bg-[#050505]/95 backdrop-blur-3xl shadow-xl border-b border-gray-100 dark:border-white/5"
-          : "bg-white dark:bg-black lg:bg-transparent lg:backdrop-blur-none"
-          } ${isScrolled ? "h-20" : "h-20 lg:h-24"} flex items-center px-4 lg:px-6`}
+          ? "bg-white dark:bg-black lg:bg-[#a9d3ec]/96 lg:dark:bg-[#a9d3ec]/96 backdrop-blur-3xl shadow-[0_18px_50px_rgba(16,24,40,0.12)] border-b border-white/40"
+          : "bg-white dark:bg-black lg:bg-[#a9d3ec]/92 lg:backdrop-blur-xl"
+          } ${isScrolled ? "h-20" : "h-20 lg:h-[78px]"} flex items-center px-4 lg:px-8`}
       >
-        <div className="mx-auto max-w-7xl w-full flex items-center justify-between">
+        <div className="mx-auto max-w-[1440px] w-full flex items-center justify-between gap-4">
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-2 group">
-            <MakeASiteLogoIcon size="md" />
-            <div className="hidden sm:flex flex-col leading-tight">
-              <span className="text-base sm:text-lg font-black tracking-tighter text-gray-900 dark:text-white uppercase">
-                MAKE<span className="font-light">ASITE</span>
+          <Link to="/" className="group flex items-center min-w-0 lg:min-w-[240px]">
+            <div className="hidden lg:flex items-center gap-4 text-[#111827]">
+              <span className="text-[0.7rem] font-medium uppercase tracking-[0.5em] transition-opacity duration-300 group-hover:opacity-70">
+                LuxStay
               </span>
-              <span className="text-[9px] font-bold text-blue-600 dark:text-blue-400 uppercase tracking-widest">
-                Website Builder
+              <span className="text-[1.15rem] font-light tracking-[0.26em] uppercase">
+                Emaar
+              </span>
+            </div>
+            <div className="lg:hidden flex flex-col leading-tight">
+              <span className="text-base font-black tracking-[0.18em] text-gray-900 uppercase">
+                LuxStay
+              </span>
+              <span className="text-[9px] font-bold text-amber-700 uppercase tracking-[0.28em]">
+                Premium Stays
               </span>
             </div>
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center gap-1">
+          <nav className="hidden lg:flex items-center justify-center flex-1 gap-2">
             {navigationLinks
               .filter(link => !link.private || isAuthenticated)
               .map((link) => (
                 <div key={link.label} className="relative group/nav">
                   <Link
                     to={link.path}
-                    className={`flex items-center gap-1.5 px-4 py-2.5 text-[10px] font-bold uppercase tracking-[0.15em] rounded-xl transition-all ${isActiveRoute(link.path)
-                      ? "text-blue-600 bg-blue-50 dark:bg-blue-900/10"
-                      : "text-gray-500 hover:text-blue-600 hover:bg-gray-50 dark:hover:bg-white/5"
+                    className={`flex items-center gap-1.5 px-4 py-2.5 text-[0.74rem] font-medium uppercase tracking-[0.22em] rounded-md transition-all ${isActiveRoute(link.path)
+                      ? "text-[#111827] bg-white/28"
+                      : "text-[#111827]/88 hover:text-[#111827] hover:bg-white/18"
                       }`}
                   >
                     {link.label}
@@ -188,16 +194,16 @@ export default function Header() {
           </nav>
 
           {/* Controls */}
-          <div className="flex items-center gap-4">
+          <div className="flex items-center justify-end gap-3 lg:min-w-[240px]">
             {/* Cart Indicator */}
             {isAuthenticated && (
               <Link
                 to="/cart"
-                className="relative p-2.5 rounded-xl bg-gray-50 dark:bg-white/5 text-gray-500 hover:text-blue-600 transition-all border border-transparent hover:border-blue-600/20"
+                className="relative hidden lg:flex p-2.5 rounded-md bg-white/18 text-[#111827] hover:bg-white/30 transition-all border border-white/20"
               >
                 <ShoppingCart size={18} />
                 {items.length > 0 && (
-                  <span className="absolute -top-1 -right-1 w-5 h-5 bg-blue-600 text-white text-[9px] font-black rounded-lg flex items-center justify-center border-2 border-white dark:border-[#050505]">
+                  <span className="absolute -top-1 -right-1 w-5 h-5 bg-[#111827] text-white text-[9px] font-black rounded-md flex items-center justify-center border-2 border-[#a9d3ec]">
                     {items.length}
                   </span>
                 )}
@@ -207,7 +213,7 @@ export default function Header() {
             {/* Theme Toggle */}
             <button
               onClick={toggleTheme}
-              className="p-2.5 rounded-xl bg-gray-50 dark:bg-white/5 text-gray-500 hover:text-blue-600 transition-all shadow-sm active:scale-95"
+              className="hidden lg:flex p-2.5 rounded-md bg-white/18 text-[#111827] hover:bg-white/30 transition-all active:scale-95 border border-white/20"
               aria-label="Toggle theme"
             >
               {isDarkMode ? <Sun size={18} /> : <Moon size={18} />}
@@ -216,20 +222,20 @@ export default function Header() {
             {/* User Profile */}
             <div className="relative" ref={profileRef}>
               {!isAuthenticated ? (
-                <div className="hidden sm:flex items-center gap-2">
-                  <button onClick={() => openModal("login")} className="px-5 py-2.5 text-[10px] font-bold uppercase tracking-widest text-gray-500 hover:text-blue-600 transition-colors">Sign In</button>
-                  <button onClick={() => openModal("register")} className="px-6 py-2.5 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white rounded-xl text-[10px] font-bold uppercase tracking-widest shadow-lg shadow-blue-600/30 transition-all transform active:scale-95">Register</button>
+                <div className="hidden sm:flex items-center gap-3">
+                  <button onClick={() => openModal("login")} className="px-2 py-2 text-[0.72rem] font-medium uppercase tracking-[0.24em] text-[#111827]/80 hover:text-[#111827] transition-colors">Sign In</button>
+                  <button onClick={() => openModal("register")} className="px-6 py-3 bg-[#d7a150] hover:bg-[#c89141] text-[#1f2937] rounded-md text-[0.76rem] font-semibold uppercase tracking-[0.18em] shadow-[0_12px_24px_rgba(171,120,38,0.24)] transition-all active:scale-95">Register</button>
                 </div>
               ) : (
                 <>
                   <button
                     onClick={() => setIsProfileOpen(!isProfileOpen)}
-                    className="flex items-center gap-2 p-1.5 pr-4 bg-gray-50 dark:bg-white/5 rounded-2xl border border-transparent hover:border-blue-600/20 transition-all"
+                    className="flex items-center gap-2 p-1.5 pr-4 bg-white/18 rounded-xl border border-white/20 hover:bg-white/30 transition-all"
                   >
-                    <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-blue-600 to-blue-700 flex items-center justify-center shadow-lg shadow-blue-600/30">
+                    <div className="w-8 h-8 rounded-lg bg-[#111827] flex items-center justify-center shadow-lg shadow-black/15">
                       <User size={14} className="text-white" />
                     </div>
-                    <ChevronDown size={12} className={`text-gray-400 transition-transform duration-500 ${isProfileOpen ? 'rotate-180' : ''}`} />
+                    <ChevronDown size={12} className={`text-[#111827]/70 transition-transform duration-500 ${isProfileOpen ? 'rotate-180' : ''}`} />
                   </button>
                   {isProfileOpen && <ProfileDropdown />}
                 </>
@@ -239,7 +245,7 @@ export default function Header() {
             {/* Mobile Menu Toggle */}
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="lg:hidden p-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white transition-colors shadow-lg shadow-blue-600/30"
+              className="lg:hidden p-2.5 rounded-xl bg-[#111827] hover:bg-black text-white transition-colors shadow-lg shadow-black/20"
             >
               {isMobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
             </button>

@@ -11,7 +11,7 @@ const AppLayout = () => {
     return (
         <>
             <Navbar />
-            <main style={{ minHeight: "100vh", paddingTop: hasPad ? "68px" : 0, width: "100%", overflowX: "hidden" }}>
+            <main className="site-main" style={{ paddingTop: hasPad ? "92px" : 0 }}>
                 <Outlet />
             </main>
             <Footer />

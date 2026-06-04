@@ -37,6 +37,7 @@ const ForgotPassword = lazy(() => import("./pages/auth/Forgot.jsx"));
 const NotFound = lazy(() => import("./pages/NotFound/NotFound.jsx"));
 const ComingSoon = lazy(() => import("./pages/ComingSoon/ComingSoon.jsx"));
 const Contact = lazy(() => import("./pages/Contact/Contact.jsx"));
+const ExperienceDetail = lazy(() => import("./pages/Experiences/ExperienceDetail.jsx"));
 const OAuthSuccess = lazy(() => import("./pages/auth/OAuthSuccess.jsx"));
 const NewPassword = lazy(() => import("./pages/auth/NewPassword.jsx"));
 const About = lazy(() => import("./pages/Footer/About.jsx"));
@@ -168,6 +169,7 @@ function App() {
         <Routes>
           <Route path="/" element={<AppLayout />}>
             <Route index element={<Home />} />
+            <Route path="experiences/:slug" element={<ExperienceDetail />} />
             <Route path="hotels" element={<Hotels />} />
             <Route path="hotel/:id" element={<HotelDetails />} />
             <Route path="rooms" element={<AllRooms />} />
